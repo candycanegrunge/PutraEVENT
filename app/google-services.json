@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "334754876179",
+    "project_id": "putraevent-b6349",
+    "storage_bucket": "putraevent-b6349.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334754876179:android:122fce5db6a4a2a4b7e8e6",
+        "android_client_info": {
+          "package_name": "com.example.myapptest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUvJ2yWPUvblEgxdx99hsm799eVGHYRWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
