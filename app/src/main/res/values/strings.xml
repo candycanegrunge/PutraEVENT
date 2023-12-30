@@ -1,5 +1,5 @@
 <resources>
-    <!-- Sign In Page -->
+    <!-- Sign In Page (User and Admin) -->
     <string name="app_name">PutraEVENT</string>
     <string name="sign_in_text">Sign In</string>
     <string name="username_hint">Username</string>
@@ -8,7 +8,26 @@
     <string name="forgot_txt">Forgot Password?</string>
     <string name="signup_txt">Click to Sign Up</string>
 
-    <!-- Home Page (Non-Admin) -->
+    <!-- Home Page (User and Admin) -->
     <string name="home_text">Home</string>
+
+    <!-- Sign Up / Registration (User) -->
+    <string name="SignUp_title">Sign Up</string>
+    <string name="field_firstname"> Enter First Name</string>
+    <string name="field_lastname">Enter Last Name</string>
+    <string name="field_username">Enter Username</string>
+    <string name="field_email">Enter UPM email</string>
+    <string name="field_matric">Enter Matric No.</string>
+    <string name="field_phone">Enter Phone No.</string>
+    <string name="field_pass">Enter Password</string>
+    <string name="field_confirmpass">Confirm Password</string>
+
+    <string name="field_year">Year of Study</string>
+    <string name="field_faculty">Faculty</string>
+    <string name="field_course">Course Name</string>
+
+    <string name="caption_Select">Select</string>  <!-- Will be used for drop down menu later-->
+
+
 
 </resources>

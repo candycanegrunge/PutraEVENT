@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,8 +21,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-///////////////////////////////////////////////////////////////////
+
+// Keeping this temporarily to copy paste, I am too damn lazy to type that out
+// 206730@student.upm.edu.my
+// niprog-6wAtnu-gocquj
+
+
 // SIGN IN PAGE
+///////////////////////////////
 
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_USERNAME = "username";
@@ -30,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     private MaterialButton submit_btn;
+    private TextView signUpTextView;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.username);
         editTextPassword = findViewById(R.id.password);
         submit_btn = findViewById(R.id.submit_btn);
+        signUpTextView = findViewById(R.id.signup);
+
+        // Set an onClickListener for the signUpTextView to navigate to the registration page
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userRegister(); // Call the userRegister() method to open the registration page
+            }
+        });
     }
 
     // To write data to the database, call the set() method, passing in a Map of key-value pairs.
@@ -63,32 +81,41 @@ public class MainActivity extends AppCompatActivity {
         else if (password.length() < 6) {
             Toast.makeText(MainActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else {
+        } else {
             // Check if email and password is valid
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             mAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
-                    @Override
-                    public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
-                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        openHome();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            );
+                    .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
+                        @Override
+                        public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            openHome();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(Exception e) {
+                           Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                       }
+                    });
         }
     }
 
-// The class for the home page options (non-admin)
-public void openHome() {
+
+
+
+    // The class for the home page options (admin & user)
+    public void openHome() {
         Intent open_homepage= new Intent(this, HomePage.class);
         startActivity(open_homepage);
     }
+
+    // The class for the sign up / regs of user
+    public void userRegister() {
+        Intent open_signup = new Intent(this, userRegister.class);
+        startActivity(open_signup);
+    }
+
+/////////////////////////////
 }

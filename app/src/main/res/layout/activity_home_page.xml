@@ -24,10 +24,10 @@
 
     <TextView
         android:id="@+id/home_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_below="@id/navButton"
+        android:layout_marginTop="70dp"
         android:gravity="left"
         android:text="@string/home_text"
         android:textColor="@color/black"
@@ -43,7 +43,9 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
         android:contentDescription="Open Navigation Menu"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/transparent" />
+        <!-- to add the navigation bar thing here -->
+
 
 </RelativeLayout>
 

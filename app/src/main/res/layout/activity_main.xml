@@ -47,7 +47,8 @@
         android:hint="@string/username_hint"
         android:padding="15sp"
         android:textColor="@color/black"
-        android:textColorHint="@color/grey_op" />
+        android:textColorHint="@color/grey_op"
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/password"
@@ -64,7 +65,9 @@
         android:hint="@string/password_hint"
         android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/grey_op" />
+        android:textColorHint="@color/grey_op"
+        android:inputType="textPassword"/>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submit_btn"
