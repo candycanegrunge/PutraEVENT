@@ -215,7 +215,7 @@
                 android:drawableStart="@drawable/baseline_person_24"
                 android:drawablePadding="10dp"
                 android:hint="@string/field_faculty"
-                android:inputType="number"
+                android:inputType="text"
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey_op" />
@@ -236,7 +236,7 @@
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey_op"
-                android:inputType="number"/>
+                android:inputType="text"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_btn"
