@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapptest"
+    namespace = "com.putra.management"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapptest"
+        applicationId = "com.putra.management"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

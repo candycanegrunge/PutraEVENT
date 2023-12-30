@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.myapptest" />
+                  <option name="appId" value="com.putra.management" />
                   <option name="mobileSdkAppId" value="1:334754876179:android:122fce5db6a4a2a4b7e8e6" />
                   <option name="projectId" value="putraevent-b6349" />
                   <option name="projectNumber" value="334754876179" />

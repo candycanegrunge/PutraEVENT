@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My AppTest"
+rootProject.name = "PutraEVENT"
 include(":app")
  
