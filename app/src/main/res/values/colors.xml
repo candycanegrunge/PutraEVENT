@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey_trans">#30A4A4A4</color>
+    <color name="grey_op">#FFA4A4A4</color>
+    <color name="red_light">#FFCB0101</color>
+    <color name="red_dark">#FF940809</color>
+    <color name="pink_light">#FFF5BEBB</color>
+    <color name="pink_dark">#FFEC5968</color>
 </resources>

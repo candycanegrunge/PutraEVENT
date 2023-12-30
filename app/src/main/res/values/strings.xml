@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My AppTest</string>
+    <string name="app_name">PutraEVENT</string>
     <string name="sign_in_text">Sign In</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>

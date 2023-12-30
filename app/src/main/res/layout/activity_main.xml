@@ -7,18 +7,29 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+<!-- Sign In page -->
+
+    <ImageView
+        android:id="@+id/homeLogo"
+        android:layout_width="265dp"
+        android:layout_height="177dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/logo_full" />
+
     <TextView
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/homeLogo"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/sign_in_text"
-        android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textColor="@color/pink_dark"
+        android:textSize="30sp"
         android:textStyle="bold"/>
 
     <EditText
@@ -26,34 +37,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/signin"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:background="#e0e0e0"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/grey_trans"
         android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="20sp"
         android:hint="@string/username_hint"
         android:padding="15sp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/grey_op" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/username"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20sp"
-        android:layout_marginBottom="20sp"
-        android:background="#e0e0e0"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/grey_trans"
         android:drawableStart="@android:drawable/ic_lock_lock"
         android:drawablePadding="20sp"
         android:hint="@string/password_hint"
-        android:padding="15sp"
+        android:padding="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:textColorHint="@color/grey_op" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submit_btn"
@@ -62,11 +73,13 @@
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20sp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20sp"
         android:layout_marginBottom="20sp"
-        android:backgroundTint="@color/cardview_dark_background"
+        android:backgroundTint="@color/pink_dark"
         android:text="@string/submit_btn"
+        android:textSize="17sp"
+        android:textStyle="bold"
         android:onClick="saveInfo"/>
 
     <TextView
@@ -76,11 +89,10 @@
         android:layout_below="@id/submit_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10sp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="10sp"
-        android:layout_marginBottom="10sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/forgot_txt"
         android:textColor="@color/cardview_dark_background" />
-
 
 </RelativeLayout>
