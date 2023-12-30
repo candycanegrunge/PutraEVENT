@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".forgetPass">
+
+    <!-- this image will stay in all of the pages, so copy this onto all the following pages -->
+    <ImageView
+        android:id="@+id/cornerLogo"
+        android:layout_width="20dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/clear_icon" />
+
+    <TextView
+        android:id="@+id/forgetPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/cornerLogo"
+        android:layout_marginTop="100dp"
+        android:text="@string/forgetPass"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/emailEnter"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forgetPass"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey_trans"
+        android:drawableStart="@drawable/outline_email_24"
+        android:drawablePadding="20sp"
+        android:hint="@string/emailEntermsg"
+        android:inputType="textEmailAddress"
+        android:padding="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey_op" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recoverpass_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailEnter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/red_dark"
+        android:text="@string/recPasswd"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+    <ImageButton
+        android:id="@+id/backBtn_forgetPass_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_back_24"
+        android:padding="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:contentDescription="Back to SignIn page"
+        android:background="@android:color/transparent" />
+
+</RelativeLayout>

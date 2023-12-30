@@ -16,13 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageButton
+                android:id="@+id/backBtn_signUp_signIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back_24"
+                android:padding="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:contentDescription="Back to SignIn page"
+                android:background="@android:color/transparent" />
+
             <ImageView
                 android:id="@+id/cornerLogo"
                 android:layout_width="41dp"
                 android:layout_height="35dp"
                 android:layout_gravity="end"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
                 app:srcCompat="@drawable/clear_icon" />
 
@@ -32,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="left"
                 android:text="@string/SignUp_title"

@@ -46,6 +46,20 @@
         android:background="@android:color/transparent" />
         <!-- to add the navigation bar thing here -->
 
+    <!-- TEMPORARILY - Logout button will be outside, later will put with nav Bar-->
+    <ImageButton
+        android:id="@+id/logout_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_logout_25"
+        android:padding="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="Back to SignIn page"
+        android:background="@android:color/transparent"/>
+
 
 </RelativeLayout>
 

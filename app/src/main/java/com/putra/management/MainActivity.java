@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private MaterialButton submit_btn;
     private TextView signUpTextView;
+    private TextView forgetPasswd;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -47,16 +48,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // This ID is referring to the one in the UI (xml files)
         editTextUsername = findViewById(R.id.username);
         editTextPassword = findViewById(R.id.password);
         submit_btn = findViewById(R.id.submit_btn);
         signUpTextView = findViewById(R.id.signup);
+        forgetPasswd = findViewById(R.id.forget);
 
         // Set an onClickListener for the signUpTextView to navigate to the registration page
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userRegister(); // Call the userRegister() method to open the registration page
+            }
+        });
+
+        forgetPasswd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgetPass(); // Call the userRegister() method to open the registration page
             }
         });
     }
@@ -109,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
     public void openHome() {
         Intent open_homepage= new Intent(this, HomePage.class);
         startActivity(open_homepage);
+    }
+
+    // This class for the forget password at sign in page
+    public void forgetPass() {
+        Intent open_forgetPassword= new Intent(this, forgetPass.class);
+        startActivity(open_forgetPassword);
     }
 
     // The class for the sign up / regs of user

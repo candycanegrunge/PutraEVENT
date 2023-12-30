@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class userRegister extends AppCompatActivity {
     private EditText editTextFaculty;
     private EditText editTextCourse;
     private MaterialButton submitButton;
+    private ImageButton back_signin_signup_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class userRegister extends AppCompatActivity {
         editTextFaculty = findViewById(R.id.faculty);
         editTextCourse = findViewById(R.id.course);
         submitButton = findViewById(R.id.submit_btn);
+        back_signin_signup_arrow = findViewById(R.id.backBtn_signUp_signIn);
 
         // Add functionality for the submit button or any other operations you need
         // For example:
@@ -63,6 +66,17 @@ public class userRegister extends AppCompatActivity {
                 // Perform action upon button click
             }
         });
+
+        back_signin_signup_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goback_SignIn = new Intent(userRegister.this, MainActivity.class);
+                startActivity(goback_SignIn);
+                finish(); // Optional - finishes the current activity to prevent going back to it on back press
+            }
+        });
+
+
     }
 
     // ... (other methods or functions)

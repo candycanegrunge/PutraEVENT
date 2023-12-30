@@ -6,10 +6,15 @@
     <string name="password_hint">Password</string>
     <string name="submit_btn">Submit</string>
     <string name="forgot_txt">Forgot Password?</string>
-    <string name="signup_txt">Click to Sign Up</string>
+    <string name="signup_txt">Sign Up</string>
 
     <!-- Home Page (User and Admin) -->
     <string name="home_text">Home</string>
+
+    <!-- Forget Password Page -->
+    <string name="forgetPass">Forgot Password</string>
+    <string name="emailEntermsg">Enter UPM email</string>
+    <string name="recPasswd">Recover Password</string>
 
     <!-- Sign Up / Registration (User) -->
     <string name="SignUp_title">Sign Up</string>
@@ -27,7 +32,6 @@
     <string name="field_course">Course Name</string>
 
     <string name="caption_Select">Select</string>  <!-- Will be used for drop down menu later-->
-
 
 
 </resources>
