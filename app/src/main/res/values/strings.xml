@@ -1,8 +1,14 @@
 <resources>
+    <!-- Sign In Page -->
     <string name="app_name">PutraEVENT</string>
     <string name="sign_in_text">Sign In</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="submit_btn">Submit</string>
-    <string name="forgot_txt">Forgot your Details?</string>
+    <string name="forgot_txt">Forgot Password?</string>
+    <string name="signup_txt">Click to Sign Up</string>
+
+    <!-- Home Page (Non-Admin) -->
+    <string name="home_text">Home</string>
+
 </resources>

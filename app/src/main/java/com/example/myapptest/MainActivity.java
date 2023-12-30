@@ -2,6 +2,7 @@ package com.example.myapptest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+///////////////////////////////////////////////////////////////////
+// SIGN IN PAGE
+
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
 
     private EditText editTextUsername;
     private EditText editTextPassword;
+    private MaterialButton submit_btn;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
@@ -31,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextUsername = findViewById(R.id.username);
         editTextPassword = findViewById(R.id.password);
-        MaterialButton submit_btn = findViewById(R.id.submit_btn);
+        submit_btn = findViewById(R.id.submit_btn);
     }
 
     // To write data to the database, call the set() method, passing in a Map of key-value pairs.
@@ -51,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(MainActivity.this, "User added to database", Toast.LENGTH_SHORT).show();
                     Log.d("SUCCESS", "User added to database");
+
+                    openHome(); // if Successful, will go to 'next page' --- Home page
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
@@ -61,5 +68,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         );
+
+
+
+    }
+
+
+// The class for the home page options (non-admin)
+public void openHome() {
+        Intent open_homepage= new Intent(this, HomePage.class);
+        startActivity(open_homepage);
     }
 }
