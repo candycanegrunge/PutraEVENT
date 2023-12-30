@@ -30,7 +30,11 @@ import java.util.Map;
 // SIGN IN PAGE
 ///////////////////////////////
 
-public class MainActivity extends AppCompatActivity {
+interface LoginInterface {
+    boolean emailAddressPasswordCheck(String email, String password);
+}
+
+public class MainActivity extends AppCompatActivity implements LoginInterface {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
 
@@ -71,49 +75,53 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // This method is to check if the email is valid or not
+    @Override
+    public boolean emailAddressPasswordCheck(String email, String password) {
+        // Check if email and password is empty
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Check if email is valid
+        else if (!email.contains("@student.upm.edu.my")) {
+            Toast.makeText(MainActivity.this, "Please insert the valid student email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Check if password is valid
+        else if (password.length() < 6) {
+            Toast.makeText(MainActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        } else
+            return true;
+    }
+
     // To write data to the database, call the set() method, passing in a Map of key-value pairs.
     public void loginAuth(View v) {
         String email = editTextUsername.getText().toString();
         // For email registration, is the email has ******@student.upm.edu.my ==> No need request mail address from user, just matric number
         String password = editTextPassword.getText().toString();
 
-        // Check if email and password is empty
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // Check if email is valid
-        else if (!email.contains("@student.upm.edu.my")) {
-            Toast.makeText(MainActivity.this, "Please insert the valid student email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        // Check if password is valid
-        else if (password.length() < 6) {
-            Toast.makeText(MainActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
+        if (emailAddressPasswordCheck(email, password)) {
             // Check if email and password is valid
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
-                        @Override
-                        public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
-                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            openHome();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                       @Override
-                       public void onFailure(Exception e) {
-                           Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                       }
-                    });
+                .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
+                    @Override
+                    public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        openHome();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(Exception e) {
+                       Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                   }
+            });
         }
     }
-
-
-
 
     // The class for the home page options (admin & user)
     public void openHome() {
