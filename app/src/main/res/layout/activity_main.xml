@@ -80,7 +80,7 @@
         android:text="@string/submit_btn"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:onClick="saveInfo"/>
+        android:onClick="loginAuth"/>
 
     <TextView
         android:id="@+id/forget"
