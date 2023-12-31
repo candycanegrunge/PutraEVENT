@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAppTest"
         tools:targetApi="31" >
-        <activity
-            android:name=".Home_Nav_Admin"
-            android:exported="false"
-            android:label="@string/title_activity_home_nav_admin"
-            android:theme="@style/Theme.MyAppTest.NoActionBar" />
+
         <activity
             android:name=".forgetPass"
             android:exported="false" />
