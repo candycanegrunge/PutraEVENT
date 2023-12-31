@@ -1,5 +1,6 @@
 package com.putra.management;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
 
     // This method is to check if the email is valid or not
     @Override
-    public boolean emailAddressPasswordCheck(String email, String password) {
+    public boolean emailAddressPasswordCheck(@NonNull String email, String password) {
         // Check if email and password is empty
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
