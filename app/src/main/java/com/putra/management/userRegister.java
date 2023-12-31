@@ -175,9 +175,6 @@ public class userRegister extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "createUserWithEmail:success");
-                            // TODO:　Request toi auth user once after register success
-                            saveUserDetail(mapUserDetail());
-                            // TODO: Add what to do next
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
