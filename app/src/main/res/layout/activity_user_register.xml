@@ -49,203 +49,241 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/firstname"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstNameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/signUp_title"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10sp"
                 android:hint="@string/field_firstname"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="text"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/lastname"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lastNameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/firstname"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_lastname"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="text"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/username"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lastname"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10sp"
                 android:hint="@string/field_username"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="text"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/phone"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"
+                    android:maxLength="15" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/yearStudy"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_phone"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="number"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/email"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lastname"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_email"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="textEmailAddress"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/matric"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/matricLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/email"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_matric"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="number"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/enterpass"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/matric"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/enterpassLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/matric"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@android:drawable/ic_lock_lock"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_pass"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="textPassword"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/confirmpass"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmpassLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/enterpass"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@android:drawable/ic_lock_lock"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_confirmpass"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="textPassword"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/yearStudy"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/yearStudyLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/confirmpass"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_year"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="number"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/faculty"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/yearStudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/facultyLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/yearStudy"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_faculty"
-                android:inputType="text"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op" />
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
 
-            <EditText
-                android:id="@+id/course"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/faculty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/courseLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/faculty"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/grey_trans"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:drawablePadding="10dp"
                 android:hint="@string/field_course"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey_op"
-                android:inputType="text"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/course"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/belowCourseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/courseLayout"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_courseDesc"
+                android:textColor="@color/grey_op"
+                android:textSize="12sp"
+                android:gravity="start"/>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_btn"

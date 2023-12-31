@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,17 +45,17 @@ public class userRegister extends AppCompatActivity {
     private static final String KEY_FACULTY = "faculty";
     private static final String KEY_COURSE = "course";
 
-    private EditText editTextFirstName;
-    private EditText editTextLastName;
-    private EditText editTextUsername;
-    private EditText editTextEmail;
-    private EditText editTextMatric;
-    private EditText editTextPhone;
-    private EditText editTextEnterPass;
-    private EditText editTextConfirmPass;
-    private EditText editTextYearStudy;
-    private EditText editTextFaculty;
-    private EditText editTextCourse;
+    private TextInputEditText editTextFirstName;
+    private TextInputEditText editTextLastName;
+    private TextInputEditText editTextUsername;
+    private TextInputEditText editTextEmail;
+    private TextInputEditText editTextMatric;
+    private TextInputEditText editTextPhone;
+    private TextInputEditText editTextEnterPass;
+    private TextInputEditText editTextConfirmPass;
+    private TextInputEditText editTextYearStudy;
+    private TextInputEditText editTextFaculty;
+    private TextInputEditText editTextCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MyAppTest" parent="Base.Theme.MyAppTest" />
+    <style name="Theme.MyAppTest.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.MyAppTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.MyAppTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.putra.management.HomePage;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
 
-    private EditText editTextUsername;
-    private EditText editTextPassword;
+    private TextInputEditText editTextUsername;
+    private TextInputEditText editTextPassword;
     private MaterialButton submit_btn;
     private TextView signUpTextView;
     private TextView forgetPasswd;

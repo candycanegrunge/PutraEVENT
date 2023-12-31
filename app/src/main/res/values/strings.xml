@@ -27,11 +27,30 @@
     <string name="field_pass">Enter Password</string>
     <string name="field_confirmpass">Confirm Password</string>
 
-    <string name="field_year">Year of Study</string>
-    <string name="field_faculty">Faculty</string>
-    <string name="field_course">Course Name</string>
+    <string name="field_year">Enter Year of Study [1/2/3/4]</string>
+    <string-array name="year_study_options">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 
-    <string name="caption_Select">Select</string>  <!-- Will be used for drop down menu later-->
+    <string name="field_faculty">Enter Faculty [FK/FS/etc.]</string>
+    <string name="field_course">Enter Full Course Name</string>
+    <string name="field_courseDesc">eg: Bachelor of Science in Industrial Chemistry / Bachelor of Computer and Communication Systems Engineering</string>
+
+    <string name="caption_Select">Select</string>
+    <string name="title_activity_home_nav_admin">Home_Nav_Admin</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>  <!-- Will be used for drop down menu later-->
 
 
 </resources>
