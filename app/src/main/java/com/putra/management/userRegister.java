@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,9 +56,9 @@ public class userRegister extends AppCompatActivity {
     private TextInputEditText editTextPhone;
     private TextInputEditText editTextEnterPass;
     private TextInputEditText editTextConfirmPass;
-    private TextInputEditText editTextYearStudy;
-    private TextInputEditText editTextFaculty;
-    private TextInputEditText editTextCourse;
+    private Spinner selectYearStudy;
+    private Spinner selectFaculty;
+    private Spinner selectCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +73,9 @@ public class userRegister extends AppCompatActivity {
         editTextPhone = findViewById(R.id.phone);
         editTextEnterPass = findViewById(R.id.enterpass);
         editTextConfirmPass = findViewById(R.id.confirmpass);
-        editTextYearStudy = findViewById(R.id.yearStudy);
-        editTextFaculty = findViewById(R.id.faculty);
-        editTextCourse = findViewById(R.id.course);
+        selectYearStudy = findViewById(R.id.yearStudySpinner);
+        selectFaculty = findViewById(R.id.facultySpinner);
+        selectCourse = findViewById(R.id.courseSpinner);
 
         MaterialButton submitButton = findViewById(R.id.submit_btn);
         ImageButton backToSignInButton = findViewById(R.id.backBtn_signUp_signIn);
@@ -98,6 +101,33 @@ public class userRegister extends AppCompatActivity {
                 finish(); // Optional - finishes the current activity to prevent going back to it on back press
             }
         });
+
+        selectFaculty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedFaculty = selectFaculty.getSelectedItem().toString();
+                ArrayAdapter<CharSequence> adapter = null;
+
+                if (selectedFaculty.equals(getString(R.string.faculty_fk))) {
+                    adapter = ArrayAdapter.createFromResource(userRegister.this, R.array.FK_options, android.R.layout.simple_spinner_item);
+                } else if (selectedFaculty.equals(getString(R.string.faculty_frsb))) {
+                    adapter = ArrayAdapter.createFromResource(userRegister.this, R.array.FRSB_options, android.R.layout.simple_spinner_item);
+                }
+
+                if (adapter != null) {
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    selectCourse.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle scenario when nothing is selected in the spinner
+            }
+
+        });
+
+    /////////////////////////
     }
 
     // To check if the user's input is valid
@@ -111,9 +141,9 @@ public class userRegister extends AppCompatActivity {
         String phone = editTextPhone.getText().toString();
         String enterPass = editTextEnterPass.getText().toString();
         String confirmPass = editTextConfirmPass.getText().toString();
-        String yearStudy = editTextYearStudy.getText().toString();
-        String faculty = editTextFaculty.getText().toString();
-        String course = editTextCourse.getText().toString();
+        String yearStudy = selectYearStudy.getSelectedItem().toString();
+        String faculty = selectFaculty.getSelectedItem().toString();
+        String course = selectCourse.getSelectedItem().toString();
 
         // Check if all fields are filled
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() ||
@@ -157,9 +187,9 @@ public class userRegister extends AppCompatActivity {
         userDetail.put(KEY_EMAIL, editTextEmail.getText().toString());
         userDetail.put(KEY_MATRIC, editTextMatric.getText().toString());
         userDetail.put(KEY_PHONE, editTextPhone.getText().toString());
-        userDetail.put(KEY_YEARSTUDY, editTextYearStudy.getText().toString());
-        userDetail.put(KEY_FACULTY, editTextFaculty.getText().toString());
-        userDetail.put(KEY_COURSE, editTextCourse.getText().toString());
+        userDetail.put(KEY_YEARSTUDY, selectYearStudy.getSelectedItem().toString());
+        userDetail.put(KEY_FACULTY, selectFaculty.getSelectedItem().toString());
+        userDetail.put(KEY_COURSE, selectCourse.getSelectedItem().toString());
         // All user registered via the app will be student
         // Admin need to be registered manually via Firebase Console
         userDetail.put("role", "student");

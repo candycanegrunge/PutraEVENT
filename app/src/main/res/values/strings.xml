@@ -27,7 +27,7 @@
     <string name="field_pass">Enter Password</string>
     <string name="field_confirmpass">Confirm Password</string>
 
-    <string name="field_year">Enter Year of Study [1/2/3/4]</string>
+    <string name="field_yearStudyDesc">Select Year of Study</string>
     <string-array name="year_study_options">
         <item>1</item>
         <item>2</item>
@@ -35,22 +35,31 @@
         <item>4</item>
     </string-array>
 
-    <string name="field_faculty">Enter Faculty [FK/FS/etc.]</string>
-    <string name="field_course">Enter Full Course Name</string>
-    <string name="field_courseDesc">eg: Bachelor of Science in Industrial Chemistry / Bachelor of Computer and Communication Systems Engineering</string>
+    <string name="field_facultyDesc">Select Faculty</string>
+    <string-array name="faculty_options">
+        <item>FK</item>
+        <item>FRSB</item>
+    </string-array>
 
-    <string name="caption_Select">Select</string>
-    <string name="title_activity_home_nav_admin">Home_Nav_Admin</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="field_course">Select Course Name</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>  <!-- Will be used for drop down menu later-->
+    <string name="faculty_fk">FK</string>
+    <string-array name="FK_options">
+        <item>Bachelor of Engineering (Civil)</item>
+        <item>Bachelor of Engineering (Electrical and Electronics)</item>
+        <item>Bachelor of Engineering (Chemical)</item>
+        <item>Bachelor of Engineering (Agricultural and Biosystem)</item>
+        <item>Bachelor of Engineering (Mechanical)</item>
+        <item>Bachelor of Engineering (Aerospace)</item>
+        <item>Bachelor of Engineering (Process and Food)</item>
+        <item>Bachelor of Engineering (Computer and Communication System)</item>
+    </string-array>
 
+    <string name="faculty_frsb">FRSB</string>
+    <string-array name="FRSB_options">
+        <item>Bachelor of Landscape Architecture</item>
+        <item>Bachelor of Science in Architecture</item>
+        <item>Bachelor of Design (Industrial Design)</item>
+    </string-array>
 
 </resources>

@@ -30,29 +30,35 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/emailEnter"
-        android:layout_width="340dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/forgetPass"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/grey_trans"
-        android:drawableStart="@drawable/outline_email_24"
-        android:drawablePadding="20sp"
-        android:hint="@string/emailEntermsg"
-        android:inputType="textEmailAddress"
-        android:padding="20sp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/grey_op" />
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEnter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey_op"
+            android:padding="15dp"
+            android:drawableStart="@drawable/outline_email_24"
+            android:drawablePadding="20sp"
+            android:hint="@string/emailEntermsg"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/recoverpass_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/emailEnter"
+        android:layout_below="@id/emailLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"

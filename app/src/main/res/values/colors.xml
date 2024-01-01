@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey_trans">#30A4A4A4</color>
     <color name="grey_op">#FFA4A4A4</color>
+    <color name="grey_op_dark">#FF4E4E4E</color>
     <color name="red_light">#FFCB0101</color>
     <color name="red_dark">#FF940809</color>
     <color name="pink_light">#FFF5BEBB</color>

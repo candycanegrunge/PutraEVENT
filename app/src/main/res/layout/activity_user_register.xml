@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".userRegister">
 
     <!-- this image will stay in all of the pages, so copy this onto all the following pages -->
@@ -211,78 +212,107 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:id="@+id/YearStudyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/confirmpassLayout"
+                android:layout_marginBottom="1sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_yearStudyDesc"
+                android:textColor="@color/grey_op_dark"
+                android:textSize="15sp"
+                android:gravity="start"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/yearStudyLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/field_year"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/yearStudy"
+                <Spinner
+                    android:id="@+id/yearStudySpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey_op"
-                    android:padding="15dp"/>
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:entries="@array/year_study_options"
+                    android:background="@drawable/spinner_background"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:id="@+id/FacultyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yearStudyLayout"
+                android:layout_marginBottom="1sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_facultyDesc"
+                android:textColor="@color/grey_op_dark"
+                android:textSize="15sp"
+                android:gravity="start"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/facultyLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/field_faculty"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/faculty"
+                <Spinner
+                    android:id="@+id/facultySpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/grey_op"
-                    android:padding="15dp"/>
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:entries="@array/faculty_options"
+                    android:background="@drawable/spinner_background"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:id="@+id/courseText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yearStudyLayout"
+                android:layout_marginBottom="1sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_course"
+                android:textColor="@color/grey_op_dark"
+                android:textSize="15sp"
+                android:gravity="start"/>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/courseLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/field_course"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="15dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/course"
+                <Spinner
+                    android:id="@+id/courseSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/grey_op"
-                    android:padding="15dp"/>
+                    android:padding="15dp"
+                    android:background="@drawable/spinner_background" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-            <TextView
-                android:id="@+id/belowCourseText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/courseLayout"
-                android:layout_marginBottom="15dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:text="@string/field_courseDesc"
-                android:textColor="@color/grey_op"
-                android:textSize="12sp"
-                android:gravity="start"/>
 
 
             <com.google.android.material.button.MaterialButton
@@ -292,8 +322,8 @@
                 android:layout_below="@id/password"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40sp"
                 android:layout_gravity="end"
                 android:layout_marginBottom="50dp"
                 android:backgroundTint="@color/pink_dark"

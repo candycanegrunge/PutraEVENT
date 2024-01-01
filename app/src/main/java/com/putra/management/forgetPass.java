@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -38,7 +39,7 @@ public class forgetPass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_pass);
 
-        EditText emailAddressTarget = findViewById(R.id.emailEnter);
+        TextInputEditText emailAddressTarget = findViewById(R.id.emailEnter);
         MaterialButton recover_btn = findViewById(R.id.recoverpass_btn);
         ImageButton back_forget_signin_arrow = findViewById(R.id.backBtn_forgetPass_signIn);
 
