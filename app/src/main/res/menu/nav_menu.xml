@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_25"
+            android:title="Home"/>
+
+        <item
+            android:id="@+id/nav_savedEvents"
+            android:icon="@drawable/bookmarks_24"
+            android:title="Saved Events"/>
+
+        <item
+            android:id="@+id/nav_upcoming"
+            android:icon="@drawable/notification_important_24"
+            android:title="Upcoming Events"/>
+
+        <item
+            android:id="@+id/suggest"
+            android:icon="@drawable/favorite_border_24"
+            android:title="Suggested"/>
+    </group>
+    <item
+
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/logout_Btn"
+                android:icon="@drawable/baseline_logout_25"
+                android:title="Logout"/>
+        </menu>
+
+    </item>
+
+</menu>
