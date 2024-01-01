@@ -2,7 +2,7 @@
     <!-- Sign In Page (User and Admin) -->
     <string name="app_name">PutraEVENT</string>
     <string name="sign_in_text">Sign In</string>
-    <string name="username_hint">Username</string>
+    <string name="loginEmail_hint">UPM Email</string>
     <string name="password_hint">Password</string>
     <string name="submit_btn">Submit</string>
     <string name="forgot_txt">Forgot Password?</string>
@@ -15,6 +15,8 @@
     <string name="forgetPass">Forgot Password</string>
     <string name="emailEntermsg">Enter UPM email</string>
     <string name="recPasswd">Recover Password</string>
+
+
 
     <!-- Sign Up / Registration (User) -->
     <string name="SignUp_title">Sign Up</string>
@@ -61,5 +63,9 @@
         <item>Bachelor of Science in Architecture</item>
         <item>Bachelor of Design (Industrial Design)</item>
     </string-array>
+
+
+    <!-- Create Event (Admin) -->
+    <string name="createevent_text">Create Event</string>
 
 </resources>

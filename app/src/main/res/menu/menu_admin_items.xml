@@ -2,7 +2,8 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn = "navigation_view">
+    tools:showIn="navigation_view">
+
 
     <group
         android:checkableBehavior="single">
@@ -10,7 +11,7 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home_25"
-            android:title="Home"/>
+            android:title="Home" />
 
         <item
             android:id="@+id/nav_savedEvents"
@@ -27,11 +28,18 @@
             android:icon="@drawable/favorite_border_24"
             android:title="Suggested"/>
     </group>
-    <item
 
+
+
+    <item
         android:title="">
 
         <menu>
+            <item
+                android:id="@+id/createEvents_Btn"
+                android:icon="@drawable/add_box_25"
+                android:title="Create Events"/>
+
             <item
                 android:id="@+id/logout_Btn"
                 android:icon="@drawable/baseline_logout_25"

@@ -24,11 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-// Keeping this temporarily to copy paste, I am too damn lazy to type that out
-// 206730@student.upm.edu.my
-// niprog-6wAtnu-gocquj
-
-
 // SIGN IN PAGE
 ///////////////////////////////
 
@@ -55,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         setContentView(R.layout.activity_main);
 
         // This ID is referring to the one in the UI (xml files)
-        editTextUsername = findViewById(R.id.username);
+        editTextUsername = findViewById(R.id.loginemail);
         editTextPassword = findViewById(R.id.password);
         submit_btn = findViewById(R.id.submit_btn);
         signUpTextView = findViewById(R.id.signup);
@@ -113,7 +108,11 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
                     @Override
                     public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
                         Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        openHome();
+
+                        // TODO: When user sign in --- read from database to check if admin or attendee
+                        // I think can send flag to the 'HomePage.java' OR 'HomeNav_Admin.java' --- will check on it
+
+                        openHome();     // Same view for both admin and attendee
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -127,8 +126,8 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
 
     // The class for the home page options (admin & user)
     public void openHome() {
-        Intent open_homepage= new Intent(this, HomePage.class);
-        startActivity(open_homepage);
+        Intent open_home= new Intent(this, HomePage.class);
+        startActivity(open_home);
     }
 
     // This class for the forget password at sign in page
