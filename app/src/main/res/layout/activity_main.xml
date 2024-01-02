@@ -123,5 +123,4 @@
         android:text="@string/signup_txt"
         android:textStyle="bold"
         android:textColor="@color/red_dark" />
-
 </RelativeLayout>

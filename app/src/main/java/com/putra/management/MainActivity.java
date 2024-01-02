@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.putra.management.HomePage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
     private TextView signUpTextView;
     private TextView forgetPasswd;
 
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
                 .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
                     @Override
                     public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+
                         Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                         // TODO: When user sign in --- read from database to check if admin or attendee
@@ -141,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         Intent open_signup = new Intent(this, userRegister.class);
         startActivity(open_signup);
     }
+
+
 
 /////////////////////////////
 }

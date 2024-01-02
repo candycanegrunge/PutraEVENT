@@ -68,5 +68,6 @@
 
     <!-- Create Event (Admin) -->
     <string name="createevent_text">Create Event</string>
+    <string name="token">Token</string>
 
 </resources>

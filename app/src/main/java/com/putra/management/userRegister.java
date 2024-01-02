@@ -1,5 +1,6 @@
 package com.putra.management;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,8 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.putra.management.HomePage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -87,9 +86,9 @@ public class userRegister extends AppCompatActivity {
             public void onClick(View v) {
                 // Perform action upon button click
                 if (validateInput()) {
+                    // Register the user's email and password to Firebase Authentication
                     registerNewUser(editTextEmail.getText().toString(), editTextEnterPass.getText().toString());
-                    uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                    saveUserDetail(mapUserDetail());
+
                 }
             }
         });
@@ -200,13 +199,17 @@ public class userRegister extends AppCompatActivity {
 
     // Register user's email and password to Firebase Authentication
     public void registerNewUser(String email, String password) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NotNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            saveUserDetail(mapUserDetail(), Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
                             Log.d("TAG", "createUserWithEmail:success");
+                            Log.d("TAG", "UID: " + mAuth.getCurrentUser().getUid());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
@@ -219,7 +222,7 @@ public class userRegister extends AppCompatActivity {
     }
 
     // Store user's detail to Firestore Database
-    private void saveUserDetail(Map<String, Object> userDetail) {
+    private void saveUserDetail(Map<String, Object> userDetail, String uid) {
         // Add a new document with a generated ID
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid)
@@ -233,7 +236,7 @@ public class userRegister extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(Exception e) {
+                    public void onFailure(@NonNull Exception e) {
                         Toast.makeText(userRegister.this, "Error saving user detail", Toast.LENGTH_SHORT).show();
                         Log.d("TAG", e.toString());
                         // TODO: Maybe just prompt check internet connection/try again

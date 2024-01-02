@@ -5,11 +5,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.core.view.GravityCompat;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeNav_Admin extends AppCompatActivity {
-
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private NavigationView navigationView;
     private DrawerLayout drawer;
 
@@ -42,19 +45,25 @@ public class HomeNav_Admin extends AppCompatActivity {
                 // Handle Saved Events click
             } else if (id == R.id.logout_Btn) {
                 // Log out from app
-                Intent logout = new Intent(HomeNav_Admin.this, MainActivity.class);
-                startActivity(logout);
-                finish();
+                logout();
             } else if (id == R.id.createEvents_Btn) {
                 // Log out from app
                 Intent createEvent = new Intent(HomeNav_Admin.this, CreateEvent_Admin.class);
                 startActivity(createEvent);
                 finish();
             }
-            // Add more conditions for other menu items if needed
 
+            // Add more conditions for other menu items if needed
             drawer.closeDrawer(GravityCompat.START);
             return true;
         });
+    }
+
+    private void logout() {
+//        mAuth.signOut();
+        Toast.makeText(HomeNav_Admin.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(HomeNav_Admin.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
