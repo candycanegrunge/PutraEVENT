@@ -36,7 +36,7 @@ import java.util.Objects;
 // User Registration - SIGN UP
 public class userRegister extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private FirebaseUser currentUser;
+    private String uid;
 
     private static final String KEY_FIRSTNAME = "firstname";
     private static final String KEY_LASTNAME = "lastname";
@@ -88,6 +88,7 @@ public class userRegister extends AppCompatActivity {
                 // Perform action upon button click
                 if (validateInput()) {
                     registerNewUser(editTextEmail.getText().toString(), editTextEnterPass.getText().toString());
+                    uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                     saveUserDetail(mapUserDetail());
                 }
             }
@@ -221,12 +222,13 @@ public class userRegister extends AppCompatActivity {
     private void saveUserDetail(Map<String, Object> userDetail) {
         // Add a new document with a generated ID
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(Objects.requireNonNull(userDetail.get(KEY_MATRIC)).toString())
+        db.collection("users").document(uid)
                 .set(userDetail)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(userRegister.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
