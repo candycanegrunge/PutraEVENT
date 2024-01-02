@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+<!-- This page is containing the 'items' on the navigation bar,
+     the 'layout' is at  the activity_home_nav_admin.xml -->
 
     <group
         android:checkableBehavior="single">

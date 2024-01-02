@@ -39,25 +39,26 @@
 
     <string name="field_facultyDesc">Select Faculty</string>
     <string-array name="faculty_options">
-        <item>FK</item>
-        <item>FRSB</item>
+        <item>Faculty of Engineering</item>
+        <item>Faculty of Design and Architecture</item>
     </string-array>
 
     <string name="field_course">Select Course Name</string>
 
-    <string name="faculty_fk">FK</string>
+    <string name="faculty_fk">Faculty of Engineering</string>
     <string-array name="FK_options">
-        <item>Bachelor of Engineering (Civil)</item>
-        <item>Bachelor of Engineering (Electrical and Electronics)</item>
-        <item>Bachelor of Engineering (Chemical)</item>
-        <item>Bachelor of Engineering (Agricultural and Biosystem)</item>
-        <item>Bachelor of Engineering (Mechanical)</item>
-        <item>Bachelor of Engineering (Aerospace)</item>
-        <item>Bachelor of Engineering (Process and Food)</item>
-        <item>Bachelor of Engineering (Computer and Communication System)</item>
+        <item>Bachelor of Engineering in Civil Engineering</item>
+        <item>Bachelor of Engineering in Electrical and Electronics Engineering</item>
+        <item>Bachelor of Engineering in Chemical Engineering</item>
+        <item>Bachelor of Engineering in Agricultural and Biosystem Engineering</item>
+        <item>Bachelor of Engineering in Mechanical Engineering</item>
+        <item>Bachelor of Engineering in Aerospace Engineering</item>
+        <item>Bachelor of Engineering in Process and Food Engineering</item>
+        <item>Bachelor of Engineering in Computer and Communication System Engineering</item>
     </string-array>
 
-    <string name="faculty_frsb">FRSB</string>
+
+    <string name="faculty_frsb">Faculty of Design and Architecture</string>
     <string-array name="FRSB_options">
         <item>Bachelor of Landscape Architecture</item>
         <item>Bachelor of Science in Architecture</item>
