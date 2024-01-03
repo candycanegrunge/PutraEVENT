@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomMaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="materialCalendarStyle">@style/CustomMaterialCalendar</item>
+    </style>
+
+    <style name="CustomMaterialCalendar" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:background">@color/white</item>
+        <item name="android:elevation">4dp</item>
+        <!-- Add more customizations here -->
+    </style>
+</resources>

@@ -69,5 +69,14 @@
     <!-- Create Event (Admin) -->
     <string name="createevent_text">Create Event</string>
     <string name="token">Token</string>
-
+    <string name="field_eventTitle">Enter Event Title</string>
+    <string name="field_eventDesc">Enter Event Description</string>
+    <string name="select_date_of_event">Select Date of Event</string>
+    <string name="select_startTime_event">Select Event Start Time</string>
+    <string name="select_endTime_event">Select Event End Time</string>
+    <string name="field_venue">Enter Event Venue</string>
+    <string name="field_totalseats">Enter Total Number of Seats</string>
+    <string name="field_organiser">Enter Event Organiser</string>
+    <string name="field_speaker">Enter Speaker Name</string>
+    <string name="field_eventPosterImg">Enter Event Poster as Image</string>
 </resources>

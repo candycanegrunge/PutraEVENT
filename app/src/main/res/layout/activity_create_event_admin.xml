@@ -53,6 +53,247 @@
                 android:textStyle="bold" />
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/eventTitleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_eventTitle"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/eventTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_eventDesc"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:padding="15dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/datePickerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_date_of_event"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/datePickerEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:padding="15dp"
+                    android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/startTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_startTime_event"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/startTimeEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:padding="15dp"
+                    android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/endTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/select_endTime_event"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/endTimeEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:padding="15dp"
+                    android:focusable="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/venueLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_venue"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/venue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TotalSeatsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_totalseats"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/totalSeats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/organiserLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_organiser"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/organiser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:maxLines="2"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/speakerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/field_speaker"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/speakerName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:maxLines="2"
+                    android:textColorHint="@color/grey_op"
+                    android:padding="15dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/eventPosterText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/speakerLayout"
+                android:layout_marginBottom="1sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_eventPosterImg"
+                android:textColor="@color/grey_op_dark"
+                android:textSize="15sp"
+                android:gravity="start"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp">
+
+                <!-- ImageButton for uploading image -->
+                <ImageButton
+                    android:id="@+id/uploadImageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_centerInParent="true"
+                    android:background="@color/grey_trans"
+                    android:contentDescription="Upload Image"
+                    android:onClick="onUploadImageClicked"
+                    android:src="@drawable/image_24" />
+
+                <!-- ImageView for displaying the uploaded image -->
+                <ImageView
+                    android:id="@+id/uploadedImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="40sp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="50dp"
+                android:backgroundTint="@color/pink_dark"
+                android:text="@string/submit_btn"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
 
 
         </LinearLayout>
