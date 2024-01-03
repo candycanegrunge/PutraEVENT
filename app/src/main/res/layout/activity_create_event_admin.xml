@@ -280,7 +280,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/submit_btn"
+                android:id="@+id/submit_btn_eventCreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/password"

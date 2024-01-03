@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,6 +33,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private TextInputEditText totalSeatsEditText;
     private TextInputEditText organiserNameEditText;
     private TextInputEditText speakerNameEditText;
+    private MaterialButton eventSubmit;
 
     private ImageButton uploadImageButton;
     private ImageView uploadedImageView;
@@ -52,6 +55,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         speakerNameEditText = findViewById(R.id.speakerName);
         uploadImageButton = findViewById(R.id.uploadImageButton);
         uploadedImageView = findViewById(R.id.uploadedImageView);
+        eventSubmit = findViewById(R.id.submit_btn_eventCreate);
 
         uploadImageButton.setOnClickListener(v -> openFileChooser());
 
@@ -69,8 +73,34 @@ public class CreateEvent_Admin extends AppCompatActivity {
         setupTimePicker(startTimeEditText, "TIME_PICKER_TAG");
         setupTimePicker(endTimeEditText, "END_TIME_PICKER_TAG");
 
+        //TODO: To add function for creating event after click submit, not just shows toast. Can add auth if all field is ar not full
+        eventSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Display a toast message
+                Toast.makeText(CreateEvent_Admin.this, "Created Event", Toast.LENGTH_SHORT).show();
+            }
+        });
+        /////////// Sample
+//        eventSubmit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (fieldsAreFilled()) {
+//                    // Perform action upon button click when fields are filled
+//                    // Add your action logic here
+//                } else {
+//                    Toast.makeText(CreateEvent_Admin.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//// Function to check if fields are filled
+//        private boolean fieldsAreFilled() {
+//            // Add your logic here to check if fields are filled
+//            // Return true if all fields are filled; otherwise, return false
+//        }
 
-    /////////////
+        /////////////
     }
 
     // TODO: Need to add the data extraction for all fields and also take the 'total seats' from here to use in the other functions
