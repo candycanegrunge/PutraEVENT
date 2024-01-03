@@ -60,7 +60,7 @@ public class HomeNav_Admin extends AppCompatActivity {
     }
 
     private void logout() {
-//        mAuth.signOut();
+        mAuth.signOut();
         Toast.makeText(HomeNav_Admin.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(HomeNav_Admin.this, MainActivity.class);
         startActivity(intent);

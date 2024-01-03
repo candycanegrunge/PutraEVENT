@@ -126,7 +126,6 @@ public class userRegister extends AppCompatActivity {
             }
 
         });
-
     /////////////////////////
     }
 

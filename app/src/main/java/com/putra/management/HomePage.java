@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,6 +31,7 @@ import java.util.Objects;
 
 public class HomePage extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageButton navigBtn;
 
     @Override
@@ -72,24 +74,22 @@ public class HomePage extends AppCompatActivity {
 
     // Save the token into the database
     private void saveToken(String token) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         // Create a new user with a first and last name
         Map<String, Object> token_m = new HashMap<>();
         token_m.put("token", token);
 
         // Get the document with the matching uid
-        DocumentReference docRef = db.collection("users").
+        DocumentReference docRefUser = db.collection("users").
                 document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRefUser.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 // If the document exists, update the token
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-
-                    db.collection("users")
+                    if (document.exists()) {
+                        db.collection("users")
                             .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
                             .update(token_m)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -98,13 +98,59 @@ public class HomePage extends AppCompatActivity {
                                     Log.d("TAG", "Token updated successfully");
                                     Log.d("TAG", "Token: " + token);
                                 }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("TAG", e.toString());
-                                }
                             });
+
+                        // If the user is an engineering student, update the token in the engineering collection
+                        if (Objects.equals(document.get("faculty"), "Faculty of Engineering")) {
+                            captureUserTokenToTokenCollection("engineering", token);
+                        }
+                        else if (Objects.equals(document.get("faculty"), "Faculty of Design and Architecture")) {
+                            captureUserTokenToTokenCollection("design_and_architecture", token);
+                        }
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    // Capture the user token to a dedicated collection for each faculty
+    // This is to allow the admin to send notification to the users of a specific faculty
+    // FIXME:
+    // Currently not handling the case where a new collection will be created if the
+    // collection does not exist
+    private void captureUserTokenToTokenCollection(String collectionName, String token) {
+        DocumentReference docRefToken = db.collection(collectionName).
+                document("user_list");
+
+        docRefToken.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                // If the document exists, update the token
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Replace "arrayFieldName" with the name of the field you want to read
+                        List<String> user_token_arr = (List<String>) document.get("user_token");
+                        // Check whether the token already exists in the array
+                        if (user_token_arr.contains(token)) {
+                            return;
+                        }
+                        // Add the new token to the array
+                        user_token_arr.add(token);
+                        // Update the array in the database
+                        docRefToken.update("user_token", user_token_arr)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d("TAG", "Token updated successfully");
+                                        Log.d("TAG", "Token: " + token);
+                                    }
+                                }
+                        );
+                        Log.d("TAG", "Array field value: " + user_token_arr);
+                    }
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());
                 }
