@@ -145,8 +145,5 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         Intent open_signup = new Intent(this, userRegister.class);
         startActivity(open_signup);
     }
-
-
-
 /////////////////////////////
 }
