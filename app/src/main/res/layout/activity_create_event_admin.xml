@@ -29,7 +29,7 @@
                 android:background="@android:color/transparent" />
 
 
-            <!-- this image will stay in all of the pages, so copy this onto all the following pages -->
+            <!-- to copy this onto all the following pages -->
             <ImageView
                 android:id="@+id/cornerLogo"
                 android:layout_width="41dp"
