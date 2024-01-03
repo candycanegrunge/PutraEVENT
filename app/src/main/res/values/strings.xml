@@ -47,14 +47,14 @@
 
     <string name="faculty_fk">Faculty of Engineering</string>
     <string-array name="FK_options">
-        <item>Bachelor of Engineering in Civil Engineering</item>
-        <item>Bachelor of Engineering in Electrical and Electronics Engineering</item>
-        <item>Bachelor of Engineering in Chemical Engineering</item>
-        <item>Bachelor of Engineering in Agricultural and Biosystem Engineering</item>
-        <item>Bachelor of Engineering in Mechanical Engineering</item>
-        <item>Bachelor of Engineering in Aerospace Engineering</item>
-        <item>Bachelor of Engineering in Process and Food Engineering</item>
-        <item>Bachelor of Engineering in Computer and Communication System Engineering</item>
+        <item>B.Eng in Civil Engineering</item>
+        <item>B.Eng in Electrical and Electronics Engineering</item>
+        <item>B.Eng in Chemical Engineering</item>
+        <item>B.Eng in Agricultural and Biosystem Engineering</item>
+        <item>B.Eng in Mechanical Engineering</item>
+        <item>B.Eng in Engineering in Aerospace Engineering</item>
+        <item>B.Eng in Process and Food Engineering</item>
+        <item>B.Eng in Computer and Communication System Engineering</item>
     </string-array>
 
 
