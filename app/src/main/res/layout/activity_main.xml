@@ -123,4 +123,15 @@
         android:text="@string/signup_txt"
         android:textStyle="bold"
         android:textColor="@color/red_dark" />
+
+    <CheckBox
+            android:id="@+id/adminCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forget"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/field_checkAdmin"
+            android:checked="false" />
+
 </RelativeLayout>

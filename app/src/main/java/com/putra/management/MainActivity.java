@@ -1,5 +1,6 @@
 package com.putra.management;
 
+import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
     private MaterialButton submit_btn;
     private TextView signUpTextView;
     private TextView forgetPasswd;
+    private CheckBox adminCheckbox;
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         submit_btn = findViewById(R.id.submit_btn);
         signUpTextView = findViewById(R.id.signup);
         forgetPasswd = findViewById(R.id.forget);
+        adminCheckbox = findViewById(R.id.adminCheckbox);
 
         // Set an onClickListener for the signUpTextView to navigate to the registration page
         signUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +76,15 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
                 forgetPass(); // Call the userRegister() method to open the registration page
             }
         });
+
+        // Set an onClickListener for the submit button to handle login
+        submit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginAuth(v); // Call the loginAuth() method to perform login
+            }
+        });
+
     }
 
     // This method is to check if the email is valid or not
@@ -99,38 +111,36 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
     // To write data to the database, call the set() method, passing in a Map of key-value pairs.
     public void loginAuth(View v) {
         String email = editTextUsername.getText().toString();
-        // For email registration, is the email has ******@student.upm.edu.my ==> No need request mail address from user, just matric number
         String password = editTextPassword.getText().toString();
 
         if (emailAddressPasswordCheck(email, password)) {
-            // Check if email and password is valid
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             mAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
-                    @Override
-                    public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+                    .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
+                        @Override
+                        public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
-                        // TODO: When user sign in --- read from database to check if admin or attendee
-                        // I think can send flag to the 'HomePage.java' OR 'HomeNav_Admin.java' --- will check on it
-
-                        openHome();     // Same view for both admin and attendee
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(Exception e) {
-                       Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                   }
-            });
+                            openHome();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 
+
     // The class for the home page options (admin & user)
     public void openHome() {
+        boolean isAdmin = adminCheckbox.isChecked();
+
         Intent open_home= new Intent(this, HomePage.class);
+        open_home.putExtra("isAdmin", isAdmin);
         startActivity(open_home);
     }
 

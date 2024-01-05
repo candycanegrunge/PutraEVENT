@@ -17,10 +17,9 @@
     <string name="recPasswd">Recover Password</string>
 
 
-
     <!-- Sign Up / Registration (User) -->
     <string name="SignUp_title">Sign Up</string>
-    <string name="field_firstname"> Enter First Name</string>
+    <string name="field_firstname">Enter First Name</string>
     <string name="field_lastname">Enter Last Name</string>
     <string name="field_username">Enter Username</string>
     <string name="field_email">Enter UPM email</string>
@@ -79,4 +78,5 @@
     <string name="field_organiser">Enter Event Organiser</string>
     <string name="field_speaker">Enter Speaker Name</string>
     <string name="field_eventPosterImg">Enter Event Poster as Image</string>
+    <string name="field_checkAdmin">Admin</string>
 </resources>

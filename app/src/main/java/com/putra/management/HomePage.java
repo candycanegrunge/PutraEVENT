@@ -45,12 +45,23 @@ public class HomePage extends AppCompatActivity {
         // TODO: USE IF ELSE TO SHOW OR HIDE THE 'CREATE EVENTS'
 
         navigBtn.setOnClickListener(v -> {
-            Intent nav_adminbar = new Intent(HomePage.this, HomeNav_Admin.class);
-            nav_adminbar.putExtra("openDrawer", true); // Pass a flag to open the drawer
-            startActivity(nav_adminbar);
+            boolean adminFlag = getIntent().getBooleanExtra("isAdmin", false);
+
+            Class<?> targetClass;
+            if (adminFlag) {
+                targetClass = HomeNav_Admin.class;
+            } else {
+                targetClass = HomeNav_Attendee.class;
+            }
+
+            Intent nav_intent = new Intent(HomePage.this, targetClass);
+
+            nav_intent.putExtra("openDrawer", true); // Pass a flag to open the drawer
+            startActivity(nav_intent);
             finish(); // Optional - finishes the current activity to prevent going back to it on back press
         });
-        ////////
+
+        ////////208651@student.upm.edu.my
     }
 
     // Get the token of the device

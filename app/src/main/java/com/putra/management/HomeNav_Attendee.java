@@ -13,7 +13,7 @@ import androidx.core.view.GravityCompat;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomeNav_Admin extends AppCompatActivity {
+public class HomeNav_Attendee extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -22,9 +22,9 @@ public class HomeNav_Admin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_nav_admin);
+        setContentView(R.layout.activity_home_nav_attendee);
 
-        navigationView = findViewById(R.id.nav_view_admin);
+        navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
 
 
@@ -42,23 +42,18 @@ public class HomeNav_Admin extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
+                if (id == R.id.nav_home) {
+                    // Open Home Page
+                    Intent homeIntent = new Intent(HomeNav_Attendee.this, HomePage.class);
+                    startActivity(homeIntent);
+                    finish();
+                } else if (id == R.id.nav_savedEvents) {
+                    // Handle Saved Events click
+                } else if (id == R.id.logout_Btn) {
+                    // Log out from app
+                    logout();
+                }
 
-            if (id == R.id.nav_home) {
-                // Open Home Page
-                Intent homeIntent = new Intent(HomeNav_Admin.this, HomePage.class);
-                startActivity(homeIntent);
-                finish();
-            } else if (id == R.id.nav_savedEvents) {
-                // Handle Saved Events click
-            } else if (id == R.id.logout_Btn) {
-                // Log out from app
-                logout();
-            } else if (id == R.id.createEvents_Btn) {
-                // Log out from app
-                Intent createEvent = new Intent(HomeNav_Admin.this, CreateEvent_Admin.class);
-                startActivity(createEvent);
-                finish();
-            }
 
             // Add more conditions for other menu items if needed
             drawer.closeDrawer(GravityCompat.START);
@@ -80,8 +75,8 @@ public class HomeNav_Admin extends AppCompatActivity {
 
     private void logout() {
         mAuth.signOut();
-        Toast.makeText(HomeNav_Admin.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(HomeNav_Admin.this, MainActivity.class);
+        Toast.makeText(HomeNav_Attendee.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(HomeNav_Attendee.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
