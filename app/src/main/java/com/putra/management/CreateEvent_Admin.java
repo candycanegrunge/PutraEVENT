@@ -60,8 +60,8 @@ public class CreateEvent_Admin extends AppCompatActivity {
         uploadImageButton.setOnClickListener(v -> openFileChooser());
 
         backButton_EventCreate_Home.setOnClickListener(v -> {
-            Intent backToHome = new Intent(CreateEvent_Admin.this, HomePage.class);
-            startActivity(backToHome);
+            Intent backToAdminHomeNav = new Intent(CreateEvent_Admin.this, HomeNav_Admin.class);
+            startActivity(backToAdminHomeNav);
             finish(); // Optional - finishes the current activity to prevent going back to it on back press
         });
 
