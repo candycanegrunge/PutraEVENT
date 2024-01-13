@@ -35,8 +35,6 @@ public class HomePage extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ImageButton navigBtn;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -248,6 +246,11 @@ public class HomePage extends AppCompatActivity {
         intent.putExtra("eventDocumentId", selectedEventDocumentId);
         // Start the register_event activity
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
     }
 
 ////////////////////

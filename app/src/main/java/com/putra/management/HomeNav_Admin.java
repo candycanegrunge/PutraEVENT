@@ -85,4 +85,9 @@ public class HomeNav_Admin extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

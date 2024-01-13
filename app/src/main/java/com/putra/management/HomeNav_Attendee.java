@@ -80,4 +80,9 @@ public class HomeNav_Attendee extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

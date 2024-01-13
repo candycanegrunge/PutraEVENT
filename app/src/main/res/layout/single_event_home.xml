@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/image_24"
-            android:scaleType="fitXY"/> <!-- Default image -->
+            android:scaleType="centerCrop"/> <!-- Default image -->
 
         <!-- Right Half: Event Details -->
         <LinearLayout
