@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    android:clickable="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="283dp"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <!-- Header: Event Image -->
+        <ImageView
+            android:id="@+id/idEventImageView"
+            android:layout_width="355dp"
+            android:layout_height="153dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
+
+        <!-- Header: Event Title -->
+        <TextView
+            android:id="@+id/idTVTitle"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:padding="2dp"
+            android:text="Event Title"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Header: Date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/idTVDateHeader"
+                android:layout_width="50dp"
+                android:layout_height="29dp"
+                android:padding="3dp"
+                android:text="Date:"
+                android:textColor="@color/darkgray"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/idTVDate"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:padding="2dp"
+                android:text=""
+                android:textColor="@color/darkgray" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <!-- Header: Description -->
+        <TextView
+            android:id="@+id/idTVDescription"
+            android:layout_width="355dp"
+            android:layout_height="50dp"
+            android:padding="3dp"
+            android:text="Description :"
+            android:textColor="@color/darkgray" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

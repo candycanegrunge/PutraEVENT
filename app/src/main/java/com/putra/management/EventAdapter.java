@@ -58,7 +58,7 @@
 //    }
 //}
 
-package com.example.myapptest;
+package com.putra.management;
 
 import android.content.Context;
 import android.content.Intent;
@@ -80,7 +80,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private ArrayList<event> eventArrayList;
     private Context context;
 
-    public EventRVAdapter(ArrayList<event> eventArrayList, Context context) {
+    public EventAdapter(ArrayList<event> eventArrayList, Context context) {
         this.eventArrayList = eventArrayList;
         this.context = context;
     }

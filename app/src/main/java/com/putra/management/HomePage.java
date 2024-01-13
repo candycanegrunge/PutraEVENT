@@ -32,8 +32,8 @@ import java.util.*;
 
 public class HomePage extends AppCompatActivity {
     private RecyclerView eventRV;
-    private ArrayList<Event> eventList; // List to hold event data
-    private com.example.myapptest.EventAdapter eventAdapter; // Adapter for the RecyclerView
+    private ArrayList<event> eventList; // List to hold event data
+    private EventAdapter eventAdapter; // Adapter for the RecyclerView
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ImageButton navigBtn;
@@ -54,7 +54,7 @@ public class HomePage extends AppCompatActivity {
         eventRV.setHasFixedSize(true);
         eventRV.setLayoutManager(new LinearLayoutManager(this));
 
-        eventAdapter = new com.example.myapptest.EventAdapter(eventList, this);
+        eventAdapter = new EventAdapter(eventList, this);
         eventRV.setAdapter(eventAdapter);
 
         getToken();
