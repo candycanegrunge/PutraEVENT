@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                loginAuth(v); // Call the loginAuth() method to perform login
-                openHome();
+                loginAuth(v); // Call the loginAuth() method to perform login
+//                openHome();
             }
         });
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
             return false;
         }
         // Check if email is valid
-        else if (!email.contains("@student.upm.edu.my")) {
+        else if (!email.contains("@student.upm.edu.my") && !email.contains("@upm.edu.my")) {
             Toast.makeText(MainActivity.this, "Please insert the valid student email", Toast.LENGTH_SHORT).show();
             return false;
         }

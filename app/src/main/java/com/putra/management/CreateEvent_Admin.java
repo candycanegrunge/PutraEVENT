@@ -122,7 +122,9 @@ public class CreateEvent_Admin extends AppCompatActivity {
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveEventInfo(); // Call saveEventInfo when the button is clicked
+                // TODO: Check the schedule before add the event to Firestore
+                // Save event detail when the button is clicked
+                saveEventInfo();
                 // Display a toast message
                 Toast.makeText(CreateEvent_Admin.this, "Created Event", Toast.LENGTH_SHORT).show();
                 // Back to home page
@@ -132,8 +134,6 @@ public class CreateEvent_Admin extends AppCompatActivity {
             }
         });
 
-        // TODO: Check the event details and store in Firestore
-        // TODO: Check the schedule before add the event to Firestore
         /////////// Sample
 //        eventSubmit.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -207,8 +207,8 @@ public class CreateEvent_Admin extends AppCompatActivity {
                     .build();
 
             timePicker.addOnPositiveButtonClickListener(dialog -> {
-                int hour = timePicker.getHour();
-                int minute = timePicker.getMinute();
+                int hour    = timePicker.getHour();
+                int minute  = timePicker.getMinute();
 
                 // Format the selected time
                 String formattedTime = MessageFormat.format("{0}{1}",

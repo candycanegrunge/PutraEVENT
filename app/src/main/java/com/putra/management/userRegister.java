@@ -146,13 +146,13 @@ public class userRegister extends AppCompatActivity {
 
         // Check if all fields are filled
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() ||
-                matric.isEmpty() || phone.isEmpty() || enterPass.isEmpty() || confirmPass.isEmpty() ||
-                yearStudy.isEmpty() || faculty.isEmpty() || course.isEmpty()) {
+                phone.isEmpty() || enterPass.isEmpty() || confirmPass.isEmpty() || yearStudy.isEmpty() ||
+                faculty.isEmpty() || course.isEmpty()) {
             Toast.makeText(userRegister.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         }
         // Check if email is valid
-        else if (!email.matches("^\\d{6}@student.upm.edu.my")) {
-            Toast.makeText(userRegister.this, "Please insert the valid student email", Toast.LENGTH_SHORT).show();
+        else if (!email.matches("^\\d{6}@student.upm.edu.my$") && !email.matches("^[\\w.-]+@upm.edu.my$")) {
+            Toast.makeText(userRegister.this, "Please insert a valid university mail", Toast.LENGTH_SHORT).show();
         }
         // Check if password is valid
         else if (enterPass.length() < 6) {
@@ -167,8 +167,17 @@ public class userRegister extends AppCompatActivity {
             Toast.makeText(userRegister.this, "Phone number must be in the format 01234567890 or 0123456789", Toast.LENGTH_SHORT).show();
         }
         // Matric number should be 6 digits
-        else if (matric.length() != 6) {
+        else if (email.matches("^\\d{6}@student.upm.edu.my$") && matric.length() != 6) {
             Toast.makeText(userRegister.this, "Matric number must be 6 digits", Toast.LENGTH_SHORT).show();
+        }
+        // Check if the user is a staff
+        else if (email.matches("^\\d{6}@student.upm.edu.my$") && yearStudy.equals("Staff")) {
+            Toast.makeText(userRegister.this, "Please select your year of study accordingly", Toast.LENGTH_SHORT).show();
+        }
+        // Check if the user is a staff
+        else if (email.matches("^[\\w.-]+@upm.edu.my$") && yearStudy.equals("Staff")) {
+            Toast.makeText(userRegister.this, "Registered as staff, may ask for admin promotion if needed", Toast.LENGTH_SHORT).show();
+            status = true;
         }
         else
             status = true;
@@ -191,7 +200,10 @@ public class userRegister extends AppCompatActivity {
         userDetail.put(KEY_COURSE, selectCourse.getSelectedItem().toString());
         // All user registered via the app will be student
         // Admin need to be registered manually via Firebase Console
-        userDetail.put("role", "student");
+        if (selectYearStudy.getSelectedItem().toString().equals("Staff"))
+            userDetail.put("role", "staff");
+        else
+            userDetail.put("role", "student");
 
         return userDetail;
     }
