@@ -31,20 +31,31 @@ import java.util.*;
 // FUNCTIONS for Homepage with event list will come here [this is for both the admin and attendee view]
 
 public class HomePage extends AppCompatActivity {
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private RecyclerView eventRV;
+    private ArrayList<Event> eventList; // List to hold event data
+    private com.example.myapptest.EventAdapter eventAdapter; // Adapter for the RecyclerView
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ImageButton navigBtn;
 
-
-    private RecyclerView recyclerView;
-    //private EventAdapter eventAdapter; // Adapter for the RecyclerView
-    private List<Event> eventList; // List to hold event data
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        RecyclerView eventRV;
+        eventList = new ArrayList<>();
+
+        // Initialize RecyclerView and its adapter
+        eventRV = findViewById(R.id.recyclerViewEvents);
+
+        eventRV.setHasFixedSize(true);
+        eventRV.setLayoutManager(new LinearLayoutManager(this));
+
+        eventAdapter = new com.example.myapptest.EventAdapter(eventList, this);
+        eventRV.setAdapter(eventAdapter);
 
         getToken();
 
@@ -69,17 +80,10 @@ public class HomePage extends AppCompatActivity {
         });
 
 
-        // Initialize RecyclerView and its adapter
-        recyclerView = findViewById(R.id.recyclerViewEvents);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        eventList = new ArrayList<>();
-        //eventAdapter = new EventAdapter(eventList);
-        //recyclerView.setAdapter(eventAdapter);
 
         // Fetch event data from Firestore and populate the eventList
         fetchEventData();
 
-        ////////208651@student.upm.edu.my
     }
 
     // Get the token of the device
@@ -211,119 +215,3 @@ public class HomePage extends AppCompatActivity {
     }
 }
 
-
-
-//TODO
-/*
-SAMPLE CHATGPT EVENT ADAPTER CODE ---- separate 'class' i think
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
-
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
-    private List<Event> eventList;
-
-    public EventAdapter(List<Event> eventList) {
-        this.eventList = eventList;
-    }
-
-    @NonNull
-    @Override
-    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event, parent, false);
-        return new EventViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        Event event = eventList.get(position);
-        // Bind event data to the views in the ViewHolder
-        holder.eventTitle.setText(event.getTitle());
-        holder.eventVenue.setText(event.getVenue());
-        holder.eventDate.setText(event.getDate());
-        holder.eventTime.setText(event.getTime());
-        // You can add more bindings here based on your Event class structure
-    }
-
-    @Override
-    public int getItemCount() {
-        return eventList.size();
-    }
-
-    public static class EventViewHolder extends RecyclerView.ViewHolder {
-        TextView eventTitle;
-        TextView eventVenue;
-        TextView eventDate;
-        TextView eventTime;
-
-        public EventViewHolder(@NonNull View itemView) {
-            super(itemView);
-            eventTitle = itemView.findViewById(R.id.event_title);
-            eventVenue = itemView.findViewById(R.id.event_venue);
-            eventDate = itemView.findViewById(R.id.event_date);
-            eventTime = itemView.findViewById(R.id.event_time);
-            // Find and assign other views if available
-        }
-    }
-}
-
- */
-
-
-
-/*
-* Sample code - After setting up event adapter to merge with HomePage ---- some parts are ady up in code
-    //... (other imports)
-import android.media.metrics.Event; // Include your Event class package here
-
-public class HomePage extends AppCompatActivity {
-    //... (other variables)
-
-    private EventAdapter eventAdapter; // Adapter for the RecyclerView
-    private List<Event> eventList; // List to hold event data
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-
-        //... (other code)
-
-        // Initialize RecyclerView and its adapter
-        recyclerView = findViewById(R.id.recyclerViewEvents);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        eventList = new ArrayList<>();
-        eventAdapter = new EventAdapter(eventList); // Instantiate your adapter here
-        recyclerView.setAdapter(eventAdapter);
-
-        // Fetch event data from Firestore and populate the eventList
-        fetchEventData();
-    }
-
-    //... (other methods)
-
-    private void fetchEventData() {
-        db.collection("events")
-            .get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        // Create an Event object from document data and add it to eventList
-                        Event event = document.toObject(Event.class); // Adjust this line according to your Event class
-                        eventList.add(event);
-                    }
-                    // Notify adapter about data changes
-                    eventAdapter.notifyDataSetChanged();
-                } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
-                }
-            });
-    }
-}
-
-* */
