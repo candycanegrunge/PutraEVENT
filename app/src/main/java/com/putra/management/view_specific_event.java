@@ -3,6 +3,7 @@ package com.putra.management;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class view_specific_event extends AppCompatActivity {
 
     private String eventDocumentId;
+    private ImageButton backButton_EventRegis_Home;
     private FirebaseFirestore db;
     private String userId = "tW6IG391zBUMl1DM7T2D2xBbus33";
     @Override
@@ -29,10 +31,18 @@ public class view_specific_event extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_specific_event);
 
+        backButton_EventRegis_Home = findViewById(R.id.backBtn_RegsEvt_Home);
+
         db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         eventDocumentId = intent.getStringExtra("eventDocumentId");
+
+        backButton_EventRegis_Home.setOnClickListener(v -> {
+            Intent backToAdminHomeNav = new Intent(view_specific_event.this, HomePage.class);
+            startActivity(backToAdminHomeNav);
+            finish(); // Optional - finishes the current activity to prevent going back to it on back press
+        });
 
         // Perform a Firestore query to get detailed event information
         FirebaseFirestore.getInstance().collection("event").document(eventDocumentId)
