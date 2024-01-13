@@ -60,8 +60,8 @@
 
 package com.putra.management;
 
+
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,20 +75,32 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
+public class EventRVAdapter extends RecyclerView.Adapter<EventRVAdapter.ViewHolder> {
 
     private ArrayList<event> eventArrayList;
     private Context context;
+    private OnItemClickListener onItemClickListener; // Add this member variable
 
-    public EventAdapter(ArrayList<event> eventArrayList, Context context) {
+    // Constructor
+    public EventRVAdapter(ArrayList<event> eventArrayList, Context context) {
         this.eventArrayList = eventArrayList;
         this.context = context;
+    }
+
+    // Interface to handle item click events
+    public interface OnItemClickListener {
+        void onItemClick(int position, View view);
+    }
+
+    // Method to set the click listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.event_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.single_event_home, parent, false));
     }
 
     @Override
@@ -96,32 +108,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         event events = eventArrayList.get(position);
         holder.eventTitleTV.setText(events.getTitle());
         holder.eventDateTV.setText(events.getDate());
-        holder.eventDescriptionTV.setText(events.getDescription());
+        holder.eventTimeTV.setText(events.getDescription());
 
         String imageUrl = events.getImage();
         Picasso.get()
                 .load(imageUrl)
                 .into(holder.eventImageView);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the click event, navigate to another page
-                Intent intent = new Intent(context, view_specific_event.class);
-
-                // Pass the extracted data into view_specific_event
-                intent.putExtra("eventTitle", events.getTitle());
-                intent.putExtra("eventDate", events.getDate());
-                intent.putExtra("eventDescription", events.getDescription());
-                intent.putExtra("eventImageUrl", events.getImage());
-                intent.putExtra("eventVenue", events.getVenue());
-                intent.putExtra("eventSpeaker", events.getSpeaker_name());
-                intent.putExtra("eventOrganizer", events.getOrganizer());
-                intent.putExtra("eventStartTime", events.getStart_time());
-                intent.putExtra("eventEndTime", events.getEnd_time());
-
-                // Start the activity
-                context.startActivity(intent);
+        // Set click listener on the item view
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(position, v);
             }
         });
     }
@@ -134,15 +131,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView eventTitleTV;
         private final TextView eventDateTV;
-        private final TextView eventDescriptionTV;
+        private final TextView eventTimeTV;
         private final ImageView eventImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            eventTitleTV = itemView.findViewById(R.id.idTVTitle);
-            eventDateTV = itemView.findViewById(R.id.idTVDate);
-            eventDescriptionTV = itemView.findViewById(R.id.idTVDescription);
-            eventImageView = itemView.findViewById(R.id.idEventImageView);
+            eventTitleTV = itemView.findViewById(R.id.event_title);
+            eventDateTV = itemView.findViewById(R.id.event_date);
+            eventTimeTV = itemView.findViewById(R.id.event_time);
+            eventImageView = itemView.findViewById(R.id.event_image);
         }
     }
 }

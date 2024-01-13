@@ -32,9 +32,9 @@ import java.util.*;
 
 public class HomePage extends AppCompatActivity {
     private RecyclerView eventRV;
-    private ArrayList<event> eventList; // List to hold event data
-    private EventAdapter eventAdapter; // Adapter for the RecyclerView
-    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ArrayList<event> eventArrayList;
+    private EventRVAdapter eventRVAdapter;
+    private FirebaseFirestore db;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ImageButton navigBtn;
 
@@ -45,17 +45,14 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        RecyclerView eventRV;
-        eventList = new ArrayList<>();
-
-        // Initialize RecyclerView and its adapter
         eventRV = findViewById(R.id.recyclerViewEvents);
-
+        db = FirebaseFirestore.getInstance();
+        eventArrayList = new ArrayList<>();
         eventRV.setHasFixedSize(true);
         eventRV.setLayoutManager(new LinearLayoutManager(this));
 
-        eventAdapter = new EventAdapter(eventList, this);
-        eventRV.setAdapter(eventAdapter);
+        eventRVAdapter = new EventRVAdapter(eventArrayList, this);
+        eventRV.setAdapter(eventRVAdapter);
 
         getToken();
 
@@ -79,10 +76,34 @@ public class HomePage extends AppCompatActivity {
             finish(); // Optional - finishes the current activity to prevent going back to it on back press
         });
 
+        db.collection("event").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot d : list) {
+                            event c = d.toObject(event.class);
+                            eventArrayList.add(c);
+                        }
+                        eventRVAdapter.notifyDataSetChanged();
+
+                        // Set click listener for each item in the RecyclerView
+                        eventRVAdapter.setOnItemClickListener((position, v) -> {
+                            // Retrieve the document ID of the clicked event
+                            Intent intent = new Intent(HomePage.this, view_specific_event.class);
+                            String selectedEventDocumentId = list.get(position).getId();
+                            intent.putExtra("eventDocumentId", selectedEventDocumentId);
+
+                            // Call the method to handle the click event
+                            onEventClick(selectedEventDocumentId);
+                        });
+                    } else {
+                        Toast.makeText(HomePage.this, "No data found in database", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(HomePage.this, "Failed to get data.", Toast.LENGTH_SHORT).show();
+                });
 
 
-        // Fetch event data from Firestore and populate the eventList
-        fetchEventData();
 
     }
 
@@ -176,12 +197,12 @@ public class HomePage extends AppCompatActivity {
                         // Update the array in the database
                         docRefToken.update("user_token", user_token_arr)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                          @Override
-                                                          public void onSuccess(Void unused) {
-                                                              Log.d("TAG", "Token updated successfully");
-                                                              Log.d("TAG", "Token: " + token);
-                                                          }
-                                                      }
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                     Log.d("TAG", "Token updated successfully");
+                                     Log.d("TAG", "Token: " + token);
+                                     }
+                                    }
                                 );
                         Log.d("TAG", "Array field value: " + user_token_arr);
                     }
@@ -192,26 +213,16 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
-    //TODO: Get info from database
-    private void fetchEventData() {
-        // Fetch event data from Firestore and add it to eventList
-        // Use Firestore queries to retrieve the data and populate eventList
-        // For example:
-        db.collection("events")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Create an Event object from document data and add it to eventList
-                            // Event event = document.toObject(Event.class); //Class requires API level 31 (current min is 24): `android.media.metrics.Event`
-                            //eventList.add(event);
-                        }
-                        // Notify adapter about data changes
-                        //eventAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.d("TAG", "Error getting documents: ", task.getException());
-                    }
-                });
+    // Method to handle the click event on a specific event
+    private void onEventClick(String selectedEventDocumentId) {
+        // Intent to navigate to the register_event activity
+        Intent intent = new Intent(HomePage.this, view_specific_event.class);
+        // Pass the selected event's document ID to the register_event activity
+        intent.putExtra("eventDocumentId", selectedEventDocumentId);
+        // Start the register_event activity
+        startActivity(intent);
     }
+
+////////////////////
 }
 
