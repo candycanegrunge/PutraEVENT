@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,6 +24,7 @@ import com.google.android.material.timepicker.TimeFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class CreateEvent_Admin extends AppCompatActivity {
 
@@ -34,11 +37,13 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private TextInputEditText organiserNameEditText;
     private TextInputEditText speakerNameEditText;
     private MaterialButton eventSubmit;
-
+   
     private ImageButton uploadImageButton;
     private ImageView uploadedImageView;
     private static final int PICK_IMAGE_REQUEST = 1;
 
+
+    private boolean isImageUploaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,13 +115,31 @@ public class CreateEvent_Admin extends AppCompatActivity {
         MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
         builder.setTheme(R.style.CustomMaterialCalendarTheme);
 
+        // Set the initial selection to today
+        builder.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+
+        // Restrict past and future dates
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setStart(MaterialDatePicker.todayInUtcMilliseconds());
+
+        builder.setCalendarConstraints(constraintsBuilder.build());
+
         datePicker.addOnPositiveButtonClickListener(selection -> {
-            String formattedDate = formatDate(selection);
-            datePickerEditText.setText(formattedDate);
+            long selectedDate = selection;
+            long currentDate = MaterialDatePicker.todayInUtcMilliseconds();
+
+            if (selectedDate >= currentDate) {
+                String formattedDate = formatDate(selectedDate);
+                datePickerEditText.setText(formattedDate);
+            } else {
+                Toast.makeText(this, "Please select a future date", Toast.LENGTH_SHORT).show();
+            }
         });
 
         datePicker.show(getSupportFragmentManager(), "DATE_PICKER_TAG");
     }
+
+
 
     private String formatDate(Long dateInMillis) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -154,7 +177,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    @Override
+   @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -165,8 +188,23 @@ public class CreateEvent_Admin extends AppCompatActivity {
             // Set the selected image to the ImageView
             uploadedImageView.setImageURI(imageUri);
             uploadedImageView.setVisibility(View.VISIBLE);
+
+            // Update the flag indicating that an image is uploaded
+            isImageUploaded = true;
         }
     }
 
-///////////////
+    private void adjustLayoutParameters() {
+        // Get the current layout parameters of the ImageButton and ImageView
+        ViewGroup.LayoutParams imageButtonParams = uploadImageButton.getLayoutParams();
+        ViewGroup.LayoutParams imageViewParams = uploadedImageView.getLayoutParams();
+
+        // Update the height of both views to 50dp
+        imageButtonParams.height = (int) getResources().getDimension(R.dimen.image_button_height);
+        imageViewParams.height = (int) getResources().getDimension(R.dimen.image_button_height);
+
+        // Set the layout parameters back to the views
+        uploadImageButton.setLayoutParams(imageButtonParams);
+        uploadedImageView.setLayoutParams(imageViewParams);
+    }
 }

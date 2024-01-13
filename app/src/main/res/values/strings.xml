@@ -77,6 +77,6 @@
     <string name="field_totalseats">Enter Total Number of Seats</string>
     <string name="field_organiser">Enter Event Organiser</string>
     <string name="field_speaker">Enter Speaker Name</string>
-    <string name="field_eventPosterImg">Enter Event Poster as Image</string>
+    <string name="field_eventPosterImg">Insert Event Poster as Image</string>
     <string name="field_checkAdmin">Admin</string>
 </resources>
