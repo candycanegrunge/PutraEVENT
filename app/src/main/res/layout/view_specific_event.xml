@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view_specific_event">
@@ -19,7 +20,7 @@
     <LinearLayout
         android:id="@+id/descriptionLayout"
         android:layout_width="match_parent"
-        android:layout_height="89dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
         android:layout_marginTop="6dp"
         android:orientation="horizontal"
@@ -214,5 +215,30 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
     </LinearLayout>
+
+
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swipe_btn_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seatLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:button_bottom_padding="20dp"
+        app:button_image_disabled="@drawable/baseline_double_arrow_24"
+        app:button_image_enabled="@drawable/round_add_task_24"
+        app:button_left_padding="20dp"
+        app:button_right_padding="20dp"
+        app:button_top_padding="20dp"
+        app:inner_text="SWIPE TO REGISTER"
+        android:textColor="@android:color/black"
+        app:inner_text_bottom_padding="20dp"
+        app:inner_text_size="19sp"
+        app:inner_text_top_padding="20dp"
+        app:button_background="@drawable/button_design"
+        app:inner_text_background="@drawable/text_design"/>
+
 
 </RelativeLayout>

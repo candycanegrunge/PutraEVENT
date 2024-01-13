@@ -16,7 +16,7 @@
                 android:name=".HomeNav_Attendee"
                 android:exported="false"/>
         <activity
-                android:name=".homeNav_Attendee"
+                android:name=".view_specific_event"
                 android:exported="false"/>
         <!--
          Set custom default icon. This is used when no icon is set for incoming notification messages.

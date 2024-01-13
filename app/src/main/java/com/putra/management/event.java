@@ -2,12 +2,12 @@ package com.putra.management;
 
 public class event {
     String title, venue, date, description, image, speaker_name, organizer, start_time, end_time;
-    int id;
+    String id;
 
     public event(){}
 
     public event(String title, String venue, String date, String description, String image,
-                 String speaker_name, String organizer, String start_time, String end_time, int id) {
+                 String speaker_name, String organizer, String start_time, String end_time, String id) {
         this.title = title;
         this.venue = venue;
         this.date = date;
@@ -93,11 +93,11 @@ public class event {
         this.end_time = end_time;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
