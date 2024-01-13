@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginAuth(v); // Call the loginAuth() method to perform login
+//                loginAuth(v); // Call the loginAuth() method to perform login
+                openHome();
             }
         });
 

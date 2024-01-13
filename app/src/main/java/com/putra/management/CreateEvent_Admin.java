@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -197,17 +198,22 @@ public class CreateEvent_Admin extends AppCompatActivity {
         editText.setFocusable(false);
         editText.setClickable(true);
         editText.setOnClickListener(v -> {
-            MaterialTimePicker.Builder builder = new MaterialTimePicker.Builder();
-            builder.setTimeFormat(TimeFormat.CLOCK_12H);
-            MaterialTimePicker timePicker = builder.build();
+            MaterialTimePicker timePicker = new MaterialTimePicker.Builder()
+                    .setTimeFormat(TimeFormat.CLOCK_12H)
+                    .setHour(12)
+                    .setMinute(0)
+                    .setInputMode(com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK)
+                    .setTitleText("Pick Time")
+                    .build();
 
             timePicker.addOnPositiveButtonClickListener(dialog -> {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
                 // Format the selected time
-                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d %s",
-                        hour % 12 == 0 ? 12 : hour % 12, minute, hour < 12 ? "AM" : "PM");
+                String formattedTime = MessageFormat.format("{0}{1}",
+                        String.format(Locale.getDefault(), "%02d", timePicker.getHour()),
+                        String.format(Locale.getDefault(), "%02d", timePicker.getMinute()));
 
                 // Set the formatted time in the EditText
                 editText.setText(formattedTime);
