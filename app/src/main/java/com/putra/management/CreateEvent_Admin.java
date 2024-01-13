@@ -29,6 +29,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -121,13 +122,12 @@ public class CreateEvent_Admin extends AppCompatActivity {
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveEventInfo(); // Call saveEventInfo when the button is clicked
-                // Display a toast message
-                Toast.makeText(CreateEvent_Admin.this, "Created Event", Toast.LENGTH_SHORT).show();
+                checkExistingEvents();
+//                saveEventInfo(); // Call saveEventInfo when the button is clicked
                 // Back to home page
-                Intent backToAdminHomeNav = new Intent(CreateEvent_Admin.this, HomePage.class);
-                startActivity(backToAdminHomeNav);
-                finish(); // Optional - finishes the current activity to prevent going back to it on back press
+//                Intent backToAdminHomeNav = new Intent(CreateEvent_Admin.this, HomePage.class);
+//                startActivity(backToAdminHomeNav);
+//                finish(); // Optional - finishes the current activity to prevent going back to it on back press
             }
         });
 
@@ -198,16 +198,16 @@ public class CreateEvent_Admin extends AppCompatActivity {
         editText.setClickable(true);
         editText.setOnClickListener(v -> {
             MaterialTimePicker.Builder builder = new MaterialTimePicker.Builder();
-            builder.setTimeFormat(TimeFormat.CLOCK_12H);
+            builder.setTimeFormat(TimeFormat.CLOCK_12H); // Use 24-hour format
+
             MaterialTimePicker timePicker = builder.build();
 
             timePicker.addOnPositiveButtonClickListener(dialog -> {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                // Format the selected time
-                String formattedTime = String.format(Locale.getDefault(), "%02d:%02d %s",
-                        hour % 12 == 0 ? 12 : hour % 12, minute, hour < 12 ? "AM" : "PM");
+                // Format the selected time as HHmm (24-hour format)
+                String formattedTime = String.format(Locale.getDefault(), "%02d%02d", hour, minute);
 
                 // Set the formatted time in the EditText
                 editText.setText(formattedTime);
@@ -216,6 +216,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
             timePicker.show(getSupportFragmentManager(), tag);
         });
     }
+
 
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -298,9 +299,13 @@ public class CreateEvent_Admin extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
+                                    String documentId = documentReference.getId();
                                     Toast.makeText(CreateEvent_Admin.this, "Event added to database", Toast.LENGTH_SHORT).show();
                                     Log.d("SUCCESS", "Event added to database");
-
+                                    saveToScheduleCollection(documentId);
+                                    Intent backToAdminHomeNav = new Intent(CreateEvent_Admin.this, HomePage.class);
+                                    startActivity(backToAdminHomeNav);
+                                    finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -323,5 +328,81 @@ public class CreateEvent_Admin extends AppCompatActivity {
         } else {
             Toast.makeText(CreateEvent_Admin.this, "Please select an image", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void checkExistingEvents() {
+        String date = datePickerEditText.getText().toString();
+        String startTime = startTimeEditText.getText().toString();
+        String endTime = endTimeEditText.getText().toString();
+        String venue = venueEnter.getText().toString();
+
+        db.collection("schedule")
+                .whereEqualTo(KEY_DATE, date)
+                .whereEqualTo(KEY_VENUE, venue)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Check if any documents match the query
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // Check for overlapping start/end times
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            String existingStartTime = document.getString(KEY_START_TIME);
+                            String existingEndTime = document.getString(KEY_END_TIME);
+
+                            // Check for time overlap using isTimeOverlap function
+                            if (isTimeOverlap(startTime, endTime, existingStartTime, existingEndTime)) {
+                                // There is an overlap, inform the user
+                                Toast.makeText(CreateEvent_Admin.this, "Event overlaps with an existing event", Toast.LENGTH_SHORT).show();
+                                return; // Exit the method as there is an overlap
+                            }
+                        }
+                    }
+
+                    // No overlapping events, proceed to save the new event
+                    saveEventInfo();
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failures in Firestore query
+                    Toast.makeText(CreateEvent_Admin.this, "Error checking existing events", Toast.LENGTH_SHORT).show();
+                    Log.d("FAIL", "Error checking existing events", e);
+                });
+    }
+
+    private boolean isTimeOverlap(String newStartTime, String newEndTime, String existingStartTime, String existingEndTime) {
+        int start1 = Integer.parseInt(newStartTime);
+        int end1 = Integer.parseInt(newEndTime);
+
+        int start2 = Integer.parseInt(existingStartTime);
+        int end2 = Integer.parseInt(existingEndTime);
+
+        // if overlap, then true and event cannot be created
+        return (start1 < end2 && end1 > start2);
+    }
+
+    private void saveToScheduleCollection(String documentId) {
+        String date = datePickerEditText.getText().toString();
+        String startTime = startTimeEditText.getText().toString();
+        String endTime = endTimeEditText.getText().toString();
+        String venue = venueEnter.getText().toString();
+
+        Map<String, Object> scheduleEvent = new HashMap<>();
+        scheduleEvent.put(KEY_DATE, date);
+        scheduleEvent.put(KEY_START_TIME, startTime);
+        scheduleEvent.put(KEY_END_TIME, endTime);
+        scheduleEvent.put(KEY_VENUE, venue);
+
+        // Use documentId as the document reference
+        db.collection("schedule").document(documentId).set(scheduleEvent)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("SUCCESS", "Details added to schedule collection");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d("FAIL", "Error adding details to schedule collection", e);
+                    }
+                });
     }
 }
