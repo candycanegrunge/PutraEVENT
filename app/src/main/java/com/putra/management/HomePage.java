@@ -1,36 +1,33 @@
 package com.putra.management;
 
-import android.media.metrics.Event;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 //TODO:
 // FUNCTIONS for Homepage with event list will come here [this is for both the admin and attendee view]
-
 public class HomePage extends AppCompatActivity {
+    private static boolean isAdmin = false;
     private RecyclerView eventRV;
     private ArrayList<event> eventArrayList;
     private EventRVAdapter eventRVAdapter;
@@ -60,20 +57,24 @@ public class HomePage extends AppCompatActivity {
         // TODO: USE IF ELSE TO SHOW OR HIDE THE 'CREATE EVENTS'
 
         navigBtn.setOnClickListener(v -> {
-            boolean adminFlag = getIntent().getBooleanExtra("isAdmin", false);
+            checkRole(new RoleCheckCallback() {
+                @Override
+                public void onRoleCheckCompleted(boolean isAdmin) {
+                    Class<?> targetClass;
 
-            Class<?> targetClass;
-            if (adminFlag) {
-                targetClass = HomeNav_Admin.class;
-            } else {
-                targetClass = HomeNav_Attendee.class;
-            }
+                    if (isAdmin) {
+                        targetClass = HomeNav_Admin.class;
+                    } else {
+                        targetClass = HomeNav_Attendee.class;
+                    }
 
-            Intent nav_intent = new Intent(HomePage.this, targetClass);
+                    Intent nav_intent = new Intent(HomePage.this, targetClass);
+                    nav_intent.putExtra("openDrawer", true); // Pass a flag to open the drawer
+                    startActivity(nav_intent);
+                    finish(); // Optional - finishes the current activity to prevent going back to it on back press
 
-            nav_intent.putExtra("openDrawer", true); // Pass a flag to open the drawer
-            startActivity(nav_intent);
-            finish(); // Optional - finishes the current activity to prevent going back to it on back press
+                }
+            });
         });
 
         db.collection("event").get()
@@ -105,6 +106,32 @@ public class HomePage extends AppCompatActivity {
 
 
 
+    }
+
+    public interface RoleCheckCallback {
+        void onRoleCheckCompleted(boolean isAdmin);
+    }
+
+    // This method is to check the role of the user signed in
+    public void checkRole(RoleCheckCallback callback) {
+        AtomicBoolean isAdminFlag = new AtomicBoolean(false);
+
+        String curr_uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        DocumentReference docRef = db.collection("users").document(curr_uid);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String role = document.getString("role");
+                    isAdminFlag.set(Objects.equals(role, "admin"));
+                    callback.onRoleCheckCompleted(isAdminFlag.get());
+
+                    // Create a log to check the role
+                    Log.d("TAG", "Role: " + role);
+                    Log.d("TAG", "isAdmin: " + isAdminFlag);
+                }
+            }
+        });
     }
 
     // Get the token of the device

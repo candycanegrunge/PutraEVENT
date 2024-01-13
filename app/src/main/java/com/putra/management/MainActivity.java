@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 // SIGN IN PAGE
@@ -39,13 +40,13 @@ interface LoginInterface {
 public class MainActivity extends AppCompatActivity implements LoginInterface {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
+    private static Boolean isAdmin;
 
     private TextInputEditText editTextUsername;
     private TextInputEditText editTextPassword;
     private MaterialButton submit_btn;
     private TextView signUpTextView;
     private TextView forgetPasswd;
-    private CheckBox adminCheckbox;
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
         submit_btn = findViewById(R.id.submit_btn);
         signUpTextView = findViewById(R.id.signup);
         forgetPasswd = findViewById(R.id.forget);
-        adminCheckbox = findViewById(R.id.adminCheckbox);
 
         // Set an onClickListener for the signUpTextView to navigate to the registration page
         signUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +137,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
 
     // The class for the home page options (admin & user)
     public void openHome() {
-        boolean isAdmin = adminCheckbox.isChecked();
-
         Intent open_home= new Intent(this, HomePage.class);
-        open_home.putExtra("isAdmin", isAdmin);
         startActivity(open_home);
     }
 
