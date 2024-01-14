@@ -212,7 +212,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
 
                 // Check if the selected time is within the range of 8 AM to 5 PM
                 if (hour < 8 || (hour == 8 && minute < 0) || hour > 17) {
-                    Toast.makeText(CreateEvent_Admin.this, "Please select a time between 8 AM and 5 PM", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateEvent_Admin.this, "Select a time between 8 AM and 5 PM", Toast.LENGTH_SHORT).show();
                 } else {
                     // Format the selected time correctly
                     String formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
