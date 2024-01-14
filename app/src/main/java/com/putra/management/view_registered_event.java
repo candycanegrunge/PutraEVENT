@@ -17,11 +17,6 @@ import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-
 public class view_registered_event extends AppCompatActivity {
 //    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -54,12 +49,11 @@ public class view_registered_event extends AppCompatActivity {
                     String eventSeat = String.valueOf(documentSnapshot.getLong("seat"));
                     String eventImageUrl = documentSnapshot.getString("image");
 
-                    // check the availability
-
                     // Set the values to display in view_specific_event.xml
                     TextView titleTextView = findViewById(R.id.titleTextView);
                     TextView dateTextView = findViewById(R.id.dateTextView);
-                    TextView startTimeTextView = findViewById(R.id.startTimeTextView);
+
+                    TextView TimeTextView = findViewById(R.id.TimeTextView);
                     TextView venueTextView = findViewById(R.id.venueTextView);
                     TextView descriptionTextView = findViewById(R.id.descriptionTextView);
                     TextView speaker_nameTextView = findViewById(R.id.speaker_nameTextView);
@@ -72,7 +66,10 @@ public class view_registered_event extends AppCompatActivity {
                     dateTextView.setText(eventDate);
                     descriptionTextView.setText(eventDescription);
                     speaker_nameTextView.setText(eventSpeaker);
-                    startTimeTextView.setText(eventStartTime);
+                    String startTime = insertColon(eventStartTime);
+                    String endTime = insertColon(eventEndTime);
+                    String timeTV = startTime + " - " + endTime;
+                    TimeTextView.setText(timeTV);
                     venueTextView.setText(eventVenue);
                     speaker_nameTextView.setText(eventSpeaker);
                     organizerTextView.setText(eventOrganizer);
@@ -90,5 +87,13 @@ public class view_registered_event extends AppCompatActivity {
                 // Handle failures in Firestore query
                 Toast.makeText(view_registered_event.this, "Failed to retrieve event details", Toast.LENGTH_SHORT).show();
             });
+    }
+
+    private String insertColon(String time) {
+        if (time.length() == 4) {
+            return time.substring(0, 2) + ":" + time.substring(2);
+        }
+        // handle other cases as needed
+        return time;
     }
 }
