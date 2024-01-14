@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
@@ -58,7 +59,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private TextInputEditText datePickerEditText;
     private TextInputEditText startTimeEditText;
     private TextInputEditText endTimeEditText;
-    private TextInputEditText venueEnter;
+    private Spinner venueSelect;
     private TextInputEditText speakerNameEditText;
     private TextInputEditText organiserNameEditText;
     private TextInputEditText totalSeatsEditText;
@@ -86,7 +87,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         datePickerEditText = findViewById(R.id.datePickerEditText);
         startTimeEditText = findViewById(R.id.startTimeEditText);
         endTimeEditText = findViewById(R.id.endTimeEditText);
-        venueEnter = findViewById(R.id.venue);
+        venueSelect = findViewById(R.id.venueSpinner);
         speakerNameEditText = findViewById(R.id.speakerName);
         organiserNameEditText = findViewById(R.id.organiser);
         totalSeatsEditText = findViewById(R.id.totalSeats);
@@ -235,7 +236,9 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = Objects.requireNonNull(datePickerEditText.getText()).toString();
         String startTime = Objects.requireNonNull(startTimeEditText.getText()).toString();
         String endTime = Objects.requireNonNull(endTimeEditText.getText()).toString();
-        String venue = Objects.requireNonNull(venueEnter.getText()).toString();
+
+        String venue =Objects.requireNonNull(venueSelect.getSelectedItem().toString());
+
         String speakerName = Objects.requireNonNull(speakerNameEditText.getText()).toString();
         String organizer = Objects.requireNonNull(organiserNameEditText.getText()).toString();
         String description = Objects.requireNonNull(descEnter.getText()).toString();
@@ -309,7 +312,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = datePickerEditText.getText().toString();
         String startTime = startTimeEditText.getText().toString();
         String endTime = endTimeEditText.getText().toString();
-        String venue = venueEnter.getText().toString();
+        String venue = venueSelect.getSelectedItem().toString();
 
         db.collection("schedule")
                 .whereEqualTo(KEY_DATE, date)
@@ -357,7 +360,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = datePickerEditText.getText().toString();
         String startTime = startTimeEditText.getText().toString();
         String endTime = endTimeEditText.getText().toString();
-        String venue = venueEnter.getText().toString();
+        String venue = venueSelect.getSelectedItem().toString();
 
         Map<String, Object> scheduleEvent = new HashMap<>();
         scheduleEvent.put(KEY_DATE, date);
