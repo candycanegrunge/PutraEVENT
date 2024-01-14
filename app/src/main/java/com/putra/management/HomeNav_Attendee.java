@@ -79,8 +79,8 @@ public class HomeNav_Attendee extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        // Do nothing
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // Do nothing
+//    }
 }
