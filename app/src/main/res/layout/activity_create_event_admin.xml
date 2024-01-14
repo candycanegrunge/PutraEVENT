@@ -313,7 +313,7 @@
                 android:layout_gravity="end"
                 android:layout_marginBottom="50dp"
                 android:backgroundTint="@color/pink_dark"
-                android:text="@string/submit_btn"
+                android:text="@string/submit_btn_createEVT"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
 

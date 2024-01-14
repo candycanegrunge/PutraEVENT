@@ -73,6 +73,7 @@
     <string name="field_eventDesc">Enter Event Description</string>
     <string name="select_date_of_event">Select Date of Event</string>
     <string name="select_startTime_event">Select Event Start Time</string>
+    <string name="submit_btn_createEVT">Submit</string>
     <string name="select_endTime_event">Select Event End Time</string>
 
     <string name="field_venue">Select Event Venue</string>
