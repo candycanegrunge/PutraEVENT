@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ebanx.swipebtn.OnStateChangeListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ebanx.swipebtn.SwipeButton;
 import com.squareup.picasso.Picasso;
 
@@ -19,13 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class view_specific_event extends AppCompatActivity {
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private String eventDocumentId;
     private ImageButton backButton_EventRegis_Home;
     private FirebaseFirestore db;
-    private String userId = "tW6IG391zBUMl1DM7T2D2xBbus33";
+    private String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

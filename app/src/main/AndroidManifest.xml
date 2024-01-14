@@ -48,6 +48,16 @@
         <activity
                 android:name=".HomePage"
                 android:exported="false"/>
+
+        <activity
+            android:name=".UpcomingEvent"
+            android:exported="false"
+          />
+        <activity
+            android:name=".view_registered_event"
+            android:exported="false"
+            />
+
         <activity
                 android:name=".MainActivity"
                 android:exported="true">

@@ -11,23 +11,6 @@
 
 
     <!-- Main content area -->
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <!-- Your content here -->
-        <ImageView
-                android:id="@+id/cornerLogo"
-                android:layout_width="20dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="25dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                app:srcCompat="@drawable/clear_icon" />
-
-    </RelativeLayout>
 
     <!-- NavigationView -->
     <com.google.android.material.navigation.NavigationView
@@ -39,6 +22,25 @@
             app:menu="@menu/menu_attendee_items"
             android:backgroundTint="@color/white"
             app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black" />
+            app:itemTextColor="@color/black" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Your content here -->
+            <ImageView
+                android:id="@+id/cornerLogo"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                app:srcCompat="@drawable/clear_icon" />
+
+        </RelativeLayout>
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

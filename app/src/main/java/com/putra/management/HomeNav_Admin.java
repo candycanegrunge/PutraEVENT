@@ -48,11 +48,17 @@ public class HomeNav_Admin extends AppCompatActivity {
                 Intent homeIntent = new Intent(HomeNav_Admin.this, HomePage.class);
                 startActivity(homeIntent);
                 finish();
+            }
+            else if (id == R.id.nav_upcoming) {
+                // check upcoming event
+                Intent upcomingEvent = new Intent(HomeNav_Admin.this, UpcomingEvent.class);
+                startActivity(upcomingEvent);
+                finish();
             } else if (id == R.id.logout_Btn) {
                 // Log out from app
                 logout();
             } else if (id == R.id.createEvents_Btn) {
-                // Log out from app
+                // Create event
                 Intent createEvent = new Intent(HomeNav_Admin.this, CreateEvent_Admin.class);
                 startActivity(createEvent);
                 finish();
