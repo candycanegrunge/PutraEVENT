@@ -152,24 +152,40 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+
+            <TextView
+                android:id="@+id/venue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/endTimeLayout"
+                android:layout_marginBottom="1sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/field_venue"
+                android:textColor="@color/grey_op_dark"
+                android:textSize="15sp"
+                android:gravity="start"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/venueLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/field_venue"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/venue"
+                <Spinner
+                    android:id="@+id/venueSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/grey_op"
-                    android:padding="15dp" />
+                    android:inputType="text"
+                    android:padding="15dp"
+                    android:entries="@array/venue_options"
+                    android:background="@drawable/spinner_background"/>
             </com.google.android.material.textfield.TextInputLayout>
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -187,6 +203,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:textColor="@color/black"
+                    android:focusable="false"
                     android:textColorHint="@color/grey_op"
                     android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -257,7 +274,7 @@
                 <ImageButton
                     android:id="@+id/uploadImageButton"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="200dp"
                     android:layout_centerInParent="true"
                     android:background="@color/grey_trans"
                     android:contentDescription="Upload Image"
@@ -273,7 +290,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     android:visibility="gone" />
             </RelativeLayout>
 
@@ -291,7 +308,7 @@
                 android:layout_gravity="end"
                 android:layout_marginBottom="50dp"
                 android:backgroundTint="@color/pink_dark"
-                android:text="@string/submit_btn"
+                android:text="@string/submit_btn_createEVT"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
 

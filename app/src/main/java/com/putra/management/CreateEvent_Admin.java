@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
@@ -58,7 +60,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private TextInputEditText datePickerEditText;
     private TextInputEditText startTimeEditText;
     private TextInputEditText endTimeEditText;
-    private TextInputEditText venueEnter;
+    private Spinner venueSelect;
     private TextInputEditText speakerNameEditText;
     private TextInputEditText organiserNameEditText;
     private TextInputEditText totalSeatsEditText;
@@ -86,7 +88,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         datePickerEditText = findViewById(R.id.datePickerEditText);
         startTimeEditText = findViewById(R.id.startTimeEditText);
         endTimeEditText = findViewById(R.id.endTimeEditText);
-        venueEnter = findViewById(R.id.venue);
+        venueSelect = findViewById(R.id.venueSpinner);
         speakerNameEditText = findViewById(R.id.speakerName);
         organiserNameEditText = findViewById(R.id.organiser);
         totalSeatsEditText = findViewById(R.id.totalSeats);
@@ -105,6 +107,22 @@ public class CreateEvent_Admin extends AppCompatActivity {
             startActivity(backToAdminHomeNav);
             finish(); // Optional - finishes the current activity to prevent going back to it on back press
         });
+
+        venueSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // When a venue is selected, update the totalSeatsEditText with the fixed number of seats
+                String selectedVenue = venueSelect.getSelectedItem().toString();
+                int fixedSeats = getFixedSeatsForVenue(selectedVenue);
+                totalSeatsEditText.setText(String.valueOf(fixedSeats));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing when nothing is selected
+            }
+        });
+
 
         datePickerEditText.setFocusable(false);
         datePickerEditText.setClickable(true);
@@ -235,7 +253,9 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = Objects.requireNonNull(datePickerEditText.getText()).toString();
         String startTime = Objects.requireNonNull(startTimeEditText.getText()).toString();
         String endTime = Objects.requireNonNull(endTimeEditText.getText()).toString();
-        String venue = Objects.requireNonNull(venueEnter.getText()).toString();
+
+        String venue =Objects.requireNonNull(venueSelect.getSelectedItem().toString());
+
         String speakerName = Objects.requireNonNull(speakerNameEditText.getText()).toString();
         String organizer = Objects.requireNonNull(organiserNameEditText.getText()).toString();
         String description = Objects.requireNonNull(descEnter.getText()).toString();
@@ -309,7 +329,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = datePickerEditText.getText().toString();
         String startTime = startTimeEditText.getText().toString();
         String endTime = endTimeEditText.getText().toString();
-        String venue = venueEnter.getText().toString();
+        String venue = venueSelect.getSelectedItem().toString();
 
         db.collection("schedule")
                 .whereEqualTo(KEY_DATE, date)
@@ -357,7 +377,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String date = datePickerEditText.getText().toString();
         String startTime = startTimeEditText.getText().toString();
         String endTime = endTimeEditText.getText().toString();
-        String venue = venueEnter.getText().toString();
+        String venue = venueSelect.getSelectedItem().toString();
 
         Map<String, Object> scheduleEvent = new HashMap<>();
         scheduleEvent.put(KEY_DATE, date);
@@ -379,5 +399,55 @@ public class CreateEvent_Admin extends AppCompatActivity {
                         Log.d("FAIL", "Error adding details to schedule collection", e);
                     }
                 });
+    }
+
+    private int getFixedSeatsForVenue(String venue) {
+        // Implement the logic to get the fixed number of seats based on the selected venue
+        // For example, use a switch statement or any other logic to determine the fixed seats
+        int fixedSeats = 0;
+
+        switch (venue) {
+            case "Thinker Space 2.0":
+                fixedSeats = 60;
+                break;
+            case "BK5 (KEJ)":
+                fixedSeats = 60;
+                break;
+            case "BK4 (KEJ)":
+                fixedSeats = 60;
+                break;
+            case "BK3 (KEJ)":
+                fixedSeats = 60;
+                break;
+            case "BT3 (KEJ)":
+                fixedSeats = 30;
+                break;
+            case "BT4 (KEJ)":
+                fixedSeats = 30;
+                break;
+            case "BT5 (KEJ)":
+                fixedSeats = 30;
+                break;
+            case "Bilik Seminar (KEJ)":
+                fixedSeats = 80;
+                break;
+            case "Bilik Auditorium (KEJ)":
+                fixedSeats = 250;
+                break;
+            case "MSKK MCE (Tower Block)":
+                fixedSeats = 30;
+                break;
+            case "MKKK7":
+                fixedSeats = 30;
+                break;
+            case "MKKK2":
+                fixedSeats = 30;
+                break;
+            case "BKSKK":
+                fixedSeats = 30;
+                break;
+        }
+
+        return fixedSeats;
     }
 }

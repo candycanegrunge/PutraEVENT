@@ -34,18 +34,18 @@ public class view_specific_event extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_specific_event);
 
-        backButton_EventRegis_Home = findViewById(R.id.backBtn_RegsEvt_Home);
+//        backButton_EventRegis_Home = findViewById(R.id.backBtn_RegsEvt_Home);
 
         db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         eventDocumentId = intent.getStringExtra("eventDocumentId");
 
-        backButton_EventRegis_Home.setOnClickListener(v -> {
-            Intent backToAdminHomeNav = new Intent(view_specific_event.this, HomePage.class);
-            startActivity(backToAdminHomeNav);
-            finish(); // Optional - finishes the current activity to prevent going back to it on back press
-        });
+//        backButton_EventRegis_Home.setOnClickListener(v -> {
+//            Intent backToAdminHomeNav = new Intent(view_specific_event.this, HomePage.class);
+//            startActivity(backToAdminHomeNav);
+//            finish(); // Optional - finishes the current activity to prevent going back to it on back press
+//        });
 
         // Perform a Firestore query to get detailed event information
         FirebaseFirestore.getInstance().collection("event").document(eventDocumentId)
@@ -71,20 +71,23 @@ public class view_specific_event extends AppCompatActivity {
                         // Set the values to display in view_specific_event.xml
                         TextView titleTextView = findViewById(R.id.titleTextView);
                         TextView dateTextView = findViewById(R.id.dateTextView);
-                        TextView startTimeTextView = findViewById(R.id.startTimeTextView);
+
+                        TextView TimeTextView = findViewById(R.id.TimeTextView);
                         TextView venueTextView = findViewById(R.id.venueTextView);
                         TextView descriptionTextView = findViewById(R.id.descriptionTextView);
                         TextView speaker_nameTextView = findViewById(R.id.speaker_nameTextView);
                         TextView organizerTextView = findViewById(R.id.organizerTextView);
                         TextView seatTextView = findViewById(R.id.seatTextView);
-
                         ImageView imageView = findViewById(R.id.imageView);
 
                         titleTextView.setText(eventTitle);
                         dateTextView.setText(eventDate);
                         descriptionTextView.setText(eventDescription);
                         speaker_nameTextView.setText(eventSpeaker);
-                        startTimeTextView.setText(eventStartTime);
+                        String startTime = insertColon(eventStartTime);
+                        String endTime = insertColon(eventEndTime);
+                        String timeTV = startTime + " - " + endTime;
+                        TimeTextView.setText(timeTV);
                         venueTextView.setText(eventVenue);
                         speaker_nameTextView.setText(eventSpeaker);
                         organizerTextView.setText(eventOrganizer);
@@ -176,6 +179,14 @@ public class view_specific_event extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    private String insertColon(String time) {
+        if (time.length() == 4) {
+            return time.substring(0, 2) + ":" + time.substring(2);
+        }
+        // handle other cases as needed
+        return time;
     }
 
 }
