@@ -21,10 +21,10 @@
             android:icon="@drawable/notification_important_24"
             android:title="Upcoming Events"/>
 
-        <item
-            android:id="@+id/suggest"
-            android:icon="@drawable/favorite_border_24"
-            android:title="Suggested"/>
+<!--        <item-->
+<!--            android:id="@+id/suggest"-->
+<!--            android:icon="@drawable/favorite_border_24"-->
+<!--            android:title="Suggested"/>-->
     </group>
 
 

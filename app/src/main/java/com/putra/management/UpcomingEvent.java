@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldPath;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,8 +18,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UpcomingEvent extends AppCompatActivity {
 
@@ -35,8 +41,8 @@ public class UpcomingEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upcoming_event);
 
-        // need to chnage the button name
-        ImageButton backButton_EventCreate_Home = findViewById(R.id.backBtn_createEvt_Home);
+        // need to change the button name
+        ImageButton navigBtn = findViewById(R.id.navButton);
 
         db = FirebaseFirestore.getInstance();
         Log.d("TAG", "userID " + userId);
@@ -44,10 +50,25 @@ public class UpcomingEvent extends AppCompatActivity {
         // Retrieve and display user events
         displayUserEvents();
 
-        backButton_EventCreate_Home.setOnClickListener(v -> {
-            Intent backToAdminHomeNav = new Intent(UpcomingEvent.this, HomeNav_Admin.class);
-            startActivity(backToAdminHomeNav);
-            finish(); // Optional - finishes the current activity to prevent going back to it on back press
+        navigBtn.setOnClickListener(v -> {
+            checkRole(new HomePage.RoleCheckCallback() {
+                @Override
+                public void onRoleCheckCompleted(boolean isAdmin) {
+                    Class<?> targetClass;
+
+                    if (isAdmin) {
+                        targetClass = HomeNav_Admin.class;
+                    } else {
+                        targetClass = HomeNav_Attendee.class;
+                    }
+
+                    Intent nav_intent = new Intent(UpcomingEvent.this, targetClass);
+                    nav_intent.putExtra("openDrawer", true); // Pass a flag to open the drawer
+                    startActivity(nav_intent);
+                    finish(); // Optional - finishes the current activity to prevent going back to it on back press
+
+                }
+            });
         });
 
     }
@@ -62,6 +83,9 @@ public class UpcomingEvent extends AppCompatActivity {
         eventRVAdapter = new EventRVAdapter(eventArrayList, this);
         eventRV.setAdapter(eventRVAdapter);
 
+        // Initialize a Map to store the event details against their IDs
+        Map<String, event> eventMap = new HashMap<>();
+
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
@@ -69,21 +93,33 @@ public class UpcomingEvent extends AppCompatActivity {
                         List<String> eventIds = (List<String>) documentSnapshot.get("event_register");
 
                         if (eventIds != null && !eventIds.isEmpty()) {
+                            // Initialize a counter to track the number of completed fetch operations
+                            AtomicInteger counter = new AtomicInteger();
+
                             // Process the data from the event_register array
                             for (String eventId : eventIds) {
-                                showToast("Event ID: " + eventId);
+                                Log.d("TAG", "Event ID: " + eventId);
 
                                 db.collection("event").document(eventId).get()
                                     .addOnSuccessListener(eventSnapshot -> {
                                         if (eventSnapshot.exists()) {
                                             event c = eventSnapshot.toObject(event.class);
-                                            eventArrayList.add(c);
+                                            eventMap.put(eventId, c);
 
                                         } else {
                                             // Handle the case where the event is not found in "events" collection
                                             showToast("Event with ID " + eventId + " not found in database");
                                         }
-                                        eventRVAdapter.notifyDataSetChanged();
+
+                                        // Increment the counter when a fetch operation completes
+                                        if (counter.incrementAndGet() == eventIds.size()) {
+                                            // When all fetch operations are complete, add the events to the ArrayList in the order of the eventIds list
+                                            for (String id : eventIds) {
+                                                eventArrayList.add(eventMap.get(id));
+                                            }
+
+                                            eventRVAdapter.notifyDataSetChanged();
+                                        }
 
                                     })
                                     .addOnFailureListener(e -> {
@@ -124,5 +160,32 @@ public class UpcomingEvent extends AppCompatActivity {
         intent.putExtra("eventDocumentId", selectedEventDocumentId);
         // Start the view_specific_event activity
         startActivity(intent);
+    }
+
+    // This method is to check the role of the user signed in
+    public void checkRole(HomePage.RoleCheckCallback callback) {
+        AtomicBoolean isAdminFlag = new AtomicBoolean(false);
+
+        String curr_uid = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        DocumentReference docRef = db.collection("users").document(curr_uid);
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String role = document.getString("role");
+                    isAdminFlag.set(Objects.equals(role, "admin"));
+                    callback.onRoleCheckCompleted(isAdminFlag.get());
+
+                    // Create a log to check the role
+                    Log.d("TAG", "Role: " + role);
+                    Log.d("TAG", "isAdmin: " + isAdminFlag);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
     }
 }

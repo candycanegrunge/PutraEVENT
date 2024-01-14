@@ -237,22 +237,22 @@ public class userRegister extends AppCompatActivity {
         // Add a new document with a generated ID
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uid)
-                .set(userDetail)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(userRegister.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(userRegister.this, "Error saving user detail", Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
-                        // TODO: Maybe just prompt check internet connection/try again
-                    }
-                });
+            .set(userDetail)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(userRegister.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(userRegister.this, "Error saving user detail", Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", e.toString());
+                    // TODO: Maybe just prompt check internet connection/try again
+                }
+            });
     }
     // ... (other methods or functions)
 }

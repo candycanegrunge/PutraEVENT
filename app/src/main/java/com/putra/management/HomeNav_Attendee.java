@@ -24,34 +24,33 @@ public class HomeNav_Attendee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_nav_attendee);
 
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view_attendee);
         drawer = findViewById(R.id.drawer_layout);
-
 
         // Retrieve the flag from the intent
         boolean shouldOpenDrawer = getIntent().getBooleanExtra("openDrawer", false);
-
-
 
         // Check if the flag is true and open the drawer --- the navigation bar
         if (shouldOpenDrawer) {
             drawer.openDrawer(GravityCompat.START);
         }
-
-
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-                if (id == R.id.nav_home) {
-                    // Open Home Page
-                    Intent homeIntent = new Intent(HomeNav_Attendee.this, HomePage.class);
-                    startActivity(homeIntent);
-                    finish();
-                } else if (id == R.id.logout_Btn) {
-                    // Log out from app
-                    logout();
-                }
-
+            if (id == R.id.nav_home) {
+                // Open Home Page
+                Intent homeIntent = new Intent(HomeNav_Attendee.this, HomePage.class);
+                startActivity(homeIntent);
+                finish();
+            } else if (id == R.id.nav_upcoming) {
+                // check upcoming event
+                Intent upcomingEvent = new Intent(HomeNav_Attendee.this, UpcomingEvent.class);
+                startActivity(upcomingEvent);
+                finish();
+            } else if (id == R.id.logout_Btn) {
+                // Log out from app
+                logout();
+            }
 
             // Add more conditions for other menu items if needed
             drawer.closeDrawer(GravityCompat.START);
