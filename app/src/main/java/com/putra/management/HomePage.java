@@ -242,7 +242,7 @@ public class HomePage extends AppCompatActivity {
     private void onEventClick(String selectedEventDocumentId) {
         // Intent to navigate to the register_event activity
         Intent intent = new Intent(HomePage.this, view_specific_event.class);
-        // Pass the selected event's document ID to the register_event activity
+        // Pass the selected event's document ID to the register_event activityF
         intent.putExtra("eventDocumentId", selectedEventDocumentId);
         // Start the register_event activity
         startActivity(intent);
