@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
             @Override
             public void onClick(View v) {
                 loginAuth(v); // Call the loginAuth() method to perform loginAuth
+//                openHome();
             }
         });
 
@@ -117,23 +118,22 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
-                        @Override
-                        public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
-                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                .addOnSuccessListener(new OnSuccessListener<com.google.firebase.auth.AuthResult>() {
+                    @Override
+                    public void onSuccess(com.google.firebase.auth.AuthResult authResult) {
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                            openHome();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(Exception e) {
-                            Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        openHome();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(Exception e) {
+                        Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
         }
     }
-
 
     // The class for the home page options (admin & user)
     public void openHome() {
