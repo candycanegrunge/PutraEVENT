@@ -40,7 +40,8 @@
                 android:text="Event Title"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:padding="8dp"/>
 
             <LinearLayout
                 android:id="@+id/descriptionLayout"
@@ -60,6 +61,7 @@
                     android:layout_marginTop="0.1dp"
                     android:text="Event Description"
                     android:textColor="@android:color/black"
+                    android:textStyle="italic"
                     android:textSize="16sp" />
             </LinearLayout>
 

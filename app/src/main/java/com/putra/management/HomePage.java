@@ -170,22 +170,15 @@ public class HomePage extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         db.collection("users")
-                                .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
-                                .update(token_m)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Log.d("TAG", "Token updated successfully");
-                                        Log.d("TAG", "Token: " + token);
-                                    }
-                                });
-
-                        // If the user is an engineering student, update the token in the engineering collection
-                        if (Objects.equals(document.get("faculty"), "Faculty of Engineering")) {
-                            captureUserTokenToTokenCollection("engineering", token);
-                        } else if (Objects.equals(document.get("faculty"), "Faculty of Design and Architecture")) {
-                            captureUserTokenToTokenCollection("design_and_architecture", token);
-                        }
+                            .document(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
+                            .update(token_m)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.d("TAG", "Token updated successfully");
+                                    Log.d("TAG", "Token: " + token);
+                                }
+                            });
                     }
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());
