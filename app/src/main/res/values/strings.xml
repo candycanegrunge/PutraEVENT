@@ -4,7 +4,7 @@
     <string name="sign_in_text">Sign In</string>
     <string name="loginEmail_hint">UPM Email</string>
     <string name="password_hint">Password</string>
-    <string name="submit_btn">Submit</string>
+    <string name="submit_btn">Log In</string>
     <string name="forgot_txt">Forgot Password?</string>
     <string name="signup_txt">Sign Up</string>
 
