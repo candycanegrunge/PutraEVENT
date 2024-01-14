@@ -15,10 +15,6 @@
             android:icon="@drawable/home_25"
             android:title="Home" />
 
-        <item
-            android:id="@+id/nav_savedEvents"
-            android:icon="@drawable/bookmarks_24"
-            android:title="Saved Events"/>
 
         <item
             android:id="@+id/nav_upcoming"

@@ -48,8 +48,6 @@ public class HomeNav_Admin extends AppCompatActivity {
                 Intent homeIntent = new Intent(HomeNav_Admin.this, HomePage.class);
                 startActivity(homeIntent);
                 finish();
-            } else if (id == R.id.nav_savedEvents) {
-                // Handle Saved Events click
             } else if (id == R.id.logout_Btn) {
                 // Log out from app
                 logout();

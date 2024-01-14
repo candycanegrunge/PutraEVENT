@@ -207,21 +207,26 @@ public class CreateEvent_Admin extends AppCompatActivity {
                     .build();
 
             timePicker.addOnPositiveButtonClickListener(dialog -> {
-                int hour    = timePicker.getHour();
-                int minute  = timePicker.getMinute();
+                int hour = timePicker.getHour();
+                int minute = timePicker.getMinute();
 
-                // Format the selected time
-                String formattedTime = MessageFormat.format("{0}{1}",
-                        String.format(Locale.getDefault(), "%02d", timePicker.getHour()),
-                        String.format(Locale.getDefault(), "%02d", timePicker.getMinute()));
+                // Check if the selected time is within the range of 8 AM to 5 PM
+                if (hour < 8 || (hour == 8 && minute < 0) || hour > 17) {
+                    Toast.makeText(CreateEvent_Admin.this, "Please select a time between 8 AM and 5 PM", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Format the selected time correctly
+                    String formattedTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute);
 
-                // Set the formatted time in the EditText
-                editText.setText(formattedTime);
+                    // Set the formatted time in the EditText
+                    editText.setText(formattedTime);
+                }
             });
 
             timePicker.show(getSupportFragmentManager(), tag);
         });
     }
+
+
 
     private void openFileChooser() {
         Intent intent = new Intent();
