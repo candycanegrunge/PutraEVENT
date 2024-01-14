@@ -79,6 +79,7 @@
     <string name="field_venue">Select Event Venue</string>
     <string-array name="venue_options">
         <item>Thinker Space 2.0</item>
+        <item>MSKK MCE (Tower Block)</item>
         <item>MKKK7</item>
         <item>MKKK2</item>
         <item>BKSKK</item>
@@ -90,8 +91,6 @@
         <item>BT5 (KEJ)</item>
         <item>Bilik Seminar (KEJ)</item>
         <item>Bilik Auditorium (KEJ)</item>
-        <item>WiPNeT (Tower Block)</item>
-        <item>MSKK MCE (Tower Block)</item>
     </string-array>
 
     <string name="field_totalseats">Enter Total Number of Seats</string>
