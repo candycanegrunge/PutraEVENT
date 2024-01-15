@@ -136,19 +136,19 @@ public class HomePage extends AppCompatActivity {
     private void getToken() {
         // Create token for Firebase Messaging
         FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        saveToken(token);
+            .addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (!task.isSuccessful()) {
+                        Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                        return;
                     }
-                });
+
+                    // Get new FCM registration token
+                    String token = task.getResult();
+                    saveToken(token);
+                }
+            });
     }
 
 
@@ -179,50 +179,6 @@ public class HomePage extends AppCompatActivity {
                                     Log.d("TAG", "Token: " + token);
                                 }
                             });
-                    }
-                } else {
-                    Log.d("TAG", "get failed with ", task.getException());
-                }
-            }
-        });
-    }
-
-
-    // Capture the user token to a dedicated collection for each faculty
-    // This is to allow the admin to send notification to the users of a specific faculty
-    // FIXME:
-    // Currently not handling the case where a new collection will be created if the
-    // collection does not exist
-    private void captureUserTokenToTokenCollection(String collectionName, String token) {
-        DocumentReference docRefToken = db.collection(collectionName).
-                document("user_list");
-
-        docRefToken.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                // If the document exists, update the token
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Replace "arrayFieldName" with the name of the field you want to read
-                        List<String> user_token_arr = (List<String>) document.get("user_token");
-                        // Check whether the token already exists in the array
-                        if (user_token_arr.contains(token)) {
-                            return;
-                        }
-                        // Add the new token to the array
-                        user_token_arr.add(token);
-                        // Update the array in the database
-                        docRefToken.update("user_token", user_token_arr)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                     Log.d("TAG", "Token updated successfully");
-                                     Log.d("TAG", "Token: " + token);
-                                     }
-                                    }
-                                );
-                        Log.d("TAG", "Array field value: " + user_token_arr);
                     }
                 } else {
                     Log.d("TAG", "get failed with ", task.getException());

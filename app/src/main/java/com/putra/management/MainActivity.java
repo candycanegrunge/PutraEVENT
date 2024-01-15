@@ -32,12 +32,7 @@ import java.util.Objects;
 
 // SIGN IN PAGE
 ///////////////////////////////
-
-interface LoginInterface {
-    boolean emailAddressPasswordCheck(String email, String password);
-}
-
-public class MainActivity extends AppCompatActivity implements LoginInterface {
+public class MainActivity extends AppCompatActivity {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static Boolean isAdmin;
@@ -89,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements LoginInterface {
     }
 
     // This method is to check if the email is valid or not
-    @Override
     public boolean emailAddressPasswordCheck(@NonNull String email, String password) {
         // Check if email and password is empty
         if (email.isEmpty() || password.isEmpty()) {

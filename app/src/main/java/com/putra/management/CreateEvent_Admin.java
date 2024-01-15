@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -99,8 +102,6 @@ public class CreateEvent_Admin extends AppCompatActivity {
         uploadedImageView = findViewById(R.id.uploadedImageView);
 
         uploadImageButton.setOnClickListener(v -> openFileChooser());
-        // Change the image size to 50dp
-        adjustLayoutParameters();
 
         backButton_EventCreate_Home.setOnClickListener(v -> {
             Intent backToAdminHomeNav = new Intent(CreateEvent_Admin.this, HomeNav_Admin.class);
@@ -225,24 +226,25 @@ public class CreateEvent_Admin extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             imageUri = data.getData();
 
-            // Set the selected image to the ImageView
-            uploadedImageView.setImageURI(imageUri);
-            uploadedImageView.setVisibility(View.VISIBLE);
+            try {
+                // Get the dimensions of the image
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                int width = bitmap.getWidth();
+                int height = bitmap.getHeight();
+
+                // Set the dimensions of the uploadImageButton to match the image
+                ViewGroup.LayoutParams params = uploadImageButton.getLayoutParams();
+                params.width = width;
+                params.height = height;
+                uploadImageButton.setLayoutParams(params);
+
+                // Display the selected image
+                uploadedImageView.setImageURI(imageUri);
+                uploadedImageView.setVisibility(View.VISIBLE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    private void adjustLayoutParameters() {
-        // Get the current layout parameters of the ImageButton and ImageView
-        ViewGroup.LayoutParams imageButtonParams = uploadImageButton.getLayoutParams();
-        ViewGroup.LayoutParams imageViewParams = uploadedImageView.getLayoutParams();
-
-        // Update the height of both views to 50dp
-        imageButtonParams.height = (int) getResources().getDimension(R.dimen.image_button_height);
-        imageViewParams.height = (int) getResources().getDimension(R.dimen.image_button_height);
-
-        // Set the layout parameters back to the views
-        uploadImageButton.setLayoutParams(imageButtonParams);
-        uploadedImageView.setLayoutParams(imageViewParams);
     }
 
     // Write event data to the database
@@ -331,35 +333,10 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String endTime = endTimeEditText.getText().toString();
         String venue = venueSelect.getSelectedItem().toString();
 
-        db.collection("schedule")
-                .whereEqualTo(KEY_DATE, date)
-                .whereEqualTo(KEY_VENUE, venue)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    // Check if any documents match the query
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        // Check for overlapping start/end times
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            String existingStartTime = document.getString(KEY_START_TIME);
-                            String existingEndTime = document.getString(KEY_END_TIME);
+        // Check event title and date to avoid duplication event created
 
-                            // Check for time overlap using isTimeOverlap function
-                            if (isTimeOverlap(startTime, endTime, existingStartTime, existingEndTime)) {
-                                // There is an overlap, inform the user
-                                Toast.makeText(CreateEvent_Admin.this, "Event overlaps with an existing event", Toast.LENGTH_SHORT).show();
-                                return; // Exit the method as there is an overlap
-                            }
-                        }
-                    }
-
-                    // No overlapping events, proceed to save the new event
-                    saveEventInfo();
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failures in Firestore query
-                    Toast.makeText(CreateEvent_Admin.this, "Error checking existing events", Toast.LENGTH_SHORT).show();
-                    Log.d("FAIL", "Error checking existing events", e);
-                });
+        // Check the date and venue to avoid overlapping events
+        checkEventOverlap(date, startTime, endTime, venue);
     }
 
     private boolean isTimeOverlap(String newStartTime, String newEndTime, String existingStartTime, String existingEndTime) {
@@ -449,5 +426,43 @@ public class CreateEvent_Admin extends AppCompatActivity {
         }
 
         return fixedSeats;
+    }
+
+    private void checkEventOverlap(String date, String startTime, String endTime, String venue) {
+        db.collection("schedule")
+            .whereEqualTo(KEY_DATE, date)
+            .whereEqualTo(KEY_VENUE, venue)
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                // Check if any documents match the query
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // Check for overlapping start/end times
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        String existingStartTime = document.getString(KEY_START_TIME);
+                        String existingEndTime = document.getString(KEY_END_TIME);
+
+                        // Check for time overlap using isTimeOverlap function
+                        if (isTimeOverlap(startTime, endTime, existingStartTime, existingEndTime)) {
+                            // There is an overlap, inform the user
+                            Toast.makeText(CreateEvent_Admin.this, "Event overlaps with an existing event", Toast.LENGTH_SHORT).show();
+                            return; // Exit the method as there is an overlap
+                        }
+                    }
+                }
+
+                // No overlapping events, proceed to save the new event
+                saveEventInfo();
+            })
+            .addOnFailureListener(e -> {
+                // Handle failures in Firestore query
+                Toast.makeText(CreateEvent_Admin.this, "Error checking existing events", Toast.LENGTH_SHORT).show();
+                Log.d("FAIL", "Error checking existing events", e);
+            });
+    }
+
+    // Disable the back button
+    @Override
+    public void onBackPressed() {
+        // Do nothing
     }
 }
