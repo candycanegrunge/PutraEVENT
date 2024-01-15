@@ -137,6 +137,15 @@ public class CreateEvent_Admin extends AppCompatActivity {
         eventSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Check if all fields are filled
+                if (titleEnter.getText().toString().isEmpty() || datePickerEditText.getText().toString().isEmpty() ||
+                        startTimeEditText.getText().toString().isEmpty() || endTimeEditText.getText().toString().isEmpty() ||
+                        speakerNameEditText.getText().toString().isEmpty() || organiserNameEditText.getText().toString().isEmpty() ||
+                        descEnter.getText().toString().isEmpty() || totalSeatsEditText.getText().toString().isEmpty()) {
+                    Toast.makeText(CreateEvent_Admin.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
                 // TODO: Check the schedule before add the event to Firestore
                 checkAndCreateEvent();
             }
@@ -334,9 +343,25 @@ public class CreateEvent_Admin extends AppCompatActivity {
         String venue = venueSelect.getSelectedItem().toString();
 
         // Check event title and date to avoid duplication event created
-
-        // Check the date and venue to avoid overlapping events
-        checkEventOverlap(date, startTime, endTime, venue);
+        db.collection("event")
+            .whereEqualTo(KEY_TITLE, titleEnter.getText().toString())
+            .whereEqualTo(KEY_DATE, date)
+            .get()
+            .addOnSuccessListener(queryDocumentSnapshots -> {
+                // Check if any documents match the query
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // There is a duplicate event, inform the user
+                    Toast.makeText(CreateEvent_Admin.this, "Event already exists", Toast.LENGTH_SHORT).show();
+                } else {
+                    // No duplicate event, proceed to check for overlapping events
+                    checkEventOverlap(date, startTime, endTime, venue);
+                }
+            })
+            .addOnFailureListener(e -> {
+                // Handle failures in Firestore query
+                Toast.makeText(CreateEvent_Admin.this, "Error checking existing events", Toast.LENGTH_SHORT).show();
+                Log.d("FAIL", "Error checking existing events", e);
+            });
     }
 
     private boolean isTimeOverlap(String newStartTime, String newEndTime, String existingStartTime, String existingEndTime) {
