@@ -117,7 +117,7 @@ public class UpcomingEvent extends AppCompatActivity {
                                             for (String id : eventIds) {
                                                 eventArrayList.add(eventMap.get(id));
                                             }
-
+                                            sortEventsByDateAndTime();
                                             eventRVAdapter.notifyDataSetChanged();
                                         }
 
@@ -180,6 +180,22 @@ public class UpcomingEvent extends AppCompatActivity {
                     Log.d("TAG", "Role: " + role);
                     Log.d("TAG", "isAdmin: " + isAdminFlag);
                 }
+            }
+        });
+    }
+
+    private void sortEventsByDateAndTime() {
+        eventArrayList.sort((o1, o2) -> {
+            String date1 = o1.getDate();
+            String date2 = o2.getDate();
+
+            if (Objects.equals(date1, date2)) {
+                // Compare the time of the event
+                String time1 = o1.getStart_time();
+                String time2 = o2.getStart_time();
+                return time1.compareTo(time2);
+            } else {
+                return date1.compareTo(date2);
             }
         });
     }

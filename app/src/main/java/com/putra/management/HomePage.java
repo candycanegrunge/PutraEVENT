@@ -79,6 +79,21 @@ public class HomePage extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        // Sort the event by date and time
+                        list.sort((o1, o2) -> {
+                            String date1 = o1.getString("date");
+                            String date2 = o2.getString("date");
+
+                            if (Objects.equals(date1, date2)) {
+                                // Compare the time of the event
+                                String time1 = o1.getString("start_time");
+                                String time2 = o2.getString("start_time");
+                                return time1.compareTo(time2);
+                            } else {
+                                return date1.compareTo(date2);
+                            }
+                        });
+
                         for (DocumentSnapshot d : list) {
                             event c = d.toObject(event.class);
                             eventArrayList.add(c);
