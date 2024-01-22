@@ -27,20 +27,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 //TODO:
 // FUNCTIONS for Homepage with event list will come here [this is for both the admin and attendee view]
 public class HomePage extends AppCompatActivity {
-    private static boolean isAdmin = false;
-    private RecyclerView eventRV;
-    private ArrayList<event> eventArrayList;
+    private ArrayList<Event> eventArrayList;
     private EventRVAdapter eventRVAdapter;
     private FirebaseFirestore db;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private ImageButton navigBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        eventRV = findViewById(R.id.recyclerViewEvents);
+        RecyclerView eventRV = findViewById(R.id.recyclerViewEvents);
         db = FirebaseFirestore.getInstance();
         eventArrayList = new ArrayList<>();
         eventRV.setHasFixedSize(true);
@@ -51,7 +48,7 @@ public class HomePage extends AppCompatActivity {
 
         getToken();
 
-        navigBtn = findViewById(R.id.navButton);
+        ImageButton navigBtn = findViewById(R.id.navButton);
         // TODO: USE IF ELSE TO SHOW OR HIDE THE 'CREATE EVENTS'
 
         navigBtn.setOnClickListener(v -> {
@@ -95,7 +92,7 @@ public class HomePage extends AppCompatActivity {
                         });
 
                         for (DocumentSnapshot d : list) {
-                            event c = d.toObject(event.class);
+                            Event c = d.toObject(Event.class);
                             eventArrayList.add(c);
                         }
                         eventRVAdapter.notifyDataSetChanged();
@@ -103,7 +100,7 @@ public class HomePage extends AppCompatActivity {
                         // Set click listener for each item in the RecyclerView
                         eventRVAdapter.setOnItemClickListener((position, v) -> {
                             // Retrieve the document ID of the clicked event
-                            Intent intent = new Intent(HomePage.this, view_specific_event.class);
+                            Intent intent = new Intent(HomePage.this, ViewSpecificEvent.class);
                             String selectedEventDocumentId = list.get(position).getId();
                             intent.putExtra("eventDocumentId", selectedEventDocumentId);
 
@@ -205,7 +202,7 @@ public class HomePage extends AppCompatActivity {
     // Method to handle the click event on a specific event
     private void onEventClick(String selectedEventDocumentId) {
         // Intent to navigate to the register_event activity
-        Intent intent = new Intent(HomePage.this, view_specific_event.class);
+        Intent intent = new Intent(HomePage.this, ViewSpecificEvent.class);
         // Pass the selected event's document ID to the register_event activityF
         intent.putExtra("eventDocumentId", selectedEventDocumentId);
         // Start the register_event activity

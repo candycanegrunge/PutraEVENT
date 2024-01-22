@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".view_registered_event">
+    tools:context=".ViewRegisteredEvent">
 
     <!-- this image will stay in all of the pages, so copy this onto all the following pages -->
     <ScrollView

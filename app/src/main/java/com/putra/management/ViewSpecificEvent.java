@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.ebanx.swipebtn.OnStateChangeListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ebanx.swipebtn.SwipeButton;
 import com.squareup.picasso.Picasso;
@@ -22,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class view_specific_event extends AppCompatActivity {
+public class ViewSpecificEvent extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private String eventDocumentId;
@@ -105,17 +104,17 @@ public class view_specific_event extends AppCompatActivity {
                             });
                         } else{
                             swipeButton.setEnabled(false);
-                            Toast.makeText(view_specific_event.this, "Quote full", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSpecificEvent.this, "Quote full", Toast.LENGTH_SHORT).show();
                         }
 
                     } else {
                         // Handle the case where the document doesn't exist
-                        Toast.makeText(view_specific_event.this, "Event details not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewSpecificEvent.this, "Event details not found", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
                     // Handle failures in Firestore query
-                    Toast.makeText(view_specific_event.this, "Failed to retrieve event details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewSpecificEvent.this, "Failed to retrieve event details", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -143,15 +142,15 @@ public class view_specific_event extends AppCompatActivity {
 
                     eventRef.update(updateData)
                             .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(view_specific_event.this, "User ID added to user_register", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ViewSpecificEvent.this, "User ID added to user_register", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(view_specific_event.this, "Failed to update user_register", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ViewSpecificEvent.this, "Failed to update user_register", Toast.LENGTH_SHORT).show();
                             });
                     DocumentReference registerRef = db.collection("users").document(userId);
                     updateFirestoreArray(registerRef, "event_register", eventDocumentId, "User ID added to event_register");
                 } else {
-                    Toast.makeText(view_specific_event.this, "You have already registered for this event", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewSpecificEvent.this, "You have already registered for this event", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -172,10 +171,10 @@ public class view_specific_event extends AppCompatActivity {
 
                 docRef.update(updateData)
                         .addOnSuccessListener(aVoid -> {
-                            Toast.makeText(view_specific_event.this, successMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSpecificEvent.this, successMessage, Toast.LENGTH_SHORT).show();
                         })
                         .addOnFailureListener(e -> {
-                            Toast.makeText(view_specific_event.this, "Failed to update " + arrayName, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ViewSpecificEvent.this, "Failed to update " + arrayName, Toast.LENGTH_SHORT).show();
                         });
             }
         });

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 public class EventRVAdapter extends RecyclerView.Adapter<EventRVAdapter.ViewHolder> {
 
-    private ArrayList<event> eventArrayList;
-    private Context context;
+    private final ArrayList<Event> eventArrayList;
+    private final Context context;
     private OnItemClickListener onItemClickListener; // Add this member variable
 
     // Constructor
-    public EventRVAdapter(ArrayList<event> eventArrayList, Context context) {
+    public EventRVAdapter(ArrayList<Event> eventArrayList, Context context) {
         this.eventArrayList = eventArrayList;
         this.context = context;
     }
@@ -44,7 +44,7 @@ public class EventRVAdapter extends RecyclerView.Adapter<EventRVAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        event events = eventArrayList.get(position);
+        Event events = eventArrayList.get(position);
         holder.eventTitleTV.setText(events.getTitle());
         holder.eventDateTV.setText(events.getDate());
 

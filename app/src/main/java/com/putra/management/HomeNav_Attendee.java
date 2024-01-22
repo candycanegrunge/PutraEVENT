@@ -15,16 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeNav_Attendee extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private NavigationView navigationView;
     private DrawerLayout drawer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_nav_attendee);
 
-        navigationView = findViewById(R.id.nav_view_attendee);
+        NavigationView navigationView = findViewById(R.id.nav_view_attendee);
         drawer = findViewById(R.id.drawer_layout);
 
         // Retrieve the flag from the intent

@@ -1,47 +1,27 @@
 package com.putra.management;
 
-import android.widget.CheckBox;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.putra.management.HomePage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 
 // SIGN IN PAGE
 ///////////////////////////////
 public class MainActivity extends AppCompatActivity {
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_PASSWORD = "password";
-    private static Boolean isAdmin;
-
     private TextInputEditText editTextUsername;
     private TextInputEditText editTextPassword;
-    private MaterialButton submit_btn;
-    private TextView signUpTextView;
-    private TextView forgetPasswd;
 
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -53,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         // This ID is referring to the one in the UI (xml files)
         editTextUsername = findViewById(R.id.loginemail);
         editTextPassword = findViewById(R.id.password);
-        submit_btn = findViewById(R.id.submit_btn);
-        signUpTextView = findViewById(R.id.signup);
-        forgetPasswd = findViewById(R.id.forget);
+        MaterialButton submit_btn = findViewById(R.id.submit_btn);
+        TextView signUpTextView = findViewById(R.id.signup);
+        TextView forgetPasswd = findViewById(R.id.forget);
 
         // Set an onClickListener for the signUpTextView to navigate to the registration page
         signUpTextView.setOnClickListener(new View.OnClickListener() {
@@ -137,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
 
     // This class for the forget password at sign in page
     public void forgetPass() {
-        Intent open_forgetPassword= new Intent(this, forgetPass.class);
+        Intent open_forgetPassword= new Intent(this, ForgetPass.class);
         startActivity(open_forgetPassword);
     }
 
     // The class for the sign up / regs of user
     public void userRegister() {
-        Intent open_signup = new Intent(this, userRegister.class);
+        Intent open_signup = new Intent(this, UserRegister.class);
         startActivity(open_signup);
     }
 /////////////////////////////

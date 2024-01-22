@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldPath;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,7 +29,7 @@ public class UpcomingEvent extends AppCompatActivity {
     private String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
     private RecyclerView eventRV;
-    private ArrayList<event> eventArrayList;
+    private ArrayList<Event> eventArrayList;
     private EventRVAdapter eventRVAdapter;
     private FirebaseFirestore db;
 
@@ -84,7 +82,7 @@ public class UpcomingEvent extends AppCompatActivity {
         eventRV.setAdapter(eventRVAdapter);
 
         // Initialize a Map to store the event details against their IDs
-        Map<String, event> eventMap = new HashMap<>();
+        Map<String, Event> eventMap = new HashMap<>();
 
         db.collection("users").document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -103,7 +101,7 @@ public class UpcomingEvent extends AppCompatActivity {
                                 db.collection("event").document(eventId).get()
                                     .addOnSuccessListener(eventSnapshot -> {
                                         if (eventSnapshot.exists()) {
-                                            event c = eventSnapshot.toObject(event.class);
+                                            Event c = eventSnapshot.toObject(Event.class);
                                             eventMap.put(eventId, c);
 
                                         } else {
@@ -131,7 +129,7 @@ public class UpcomingEvent extends AppCompatActivity {
                             // Set click listener for each item in the RecyclerView
                             eventRVAdapter.setOnItemClickListener((position, v) -> {
                                 // Retrieve the document ID of the clicked event
-                                Intent intent = new Intent(UpcomingEvent.this, view_specific_event.class);
+                                Intent intent = new Intent(UpcomingEvent.this, ViewSpecificEvent.class);
                                 String selectedEventDocumentId = eventIds.get(position);
                                 intent.putExtra("eventDocumentId", selectedEventDocumentId);
 
@@ -155,7 +153,7 @@ public class UpcomingEvent extends AppCompatActivity {
 
     private void onEventClick(String selectedEventDocumentId) {
         // Intent to navigate to the view_specific_event activity
-        Intent intent = new Intent(UpcomingEvent.this, view_registered_event.class);
+        Intent intent = new Intent(UpcomingEvent.this, ViewRegisteredEvent.class);
         // Pass the selected event's document ID to the view_specific_event activity
         intent.putExtra("eventDocumentId", selectedEventDocumentId);
         // Start the view_specific_event activity

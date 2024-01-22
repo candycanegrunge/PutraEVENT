@@ -16,7 +16,7 @@
                 android:name=".HomeNav_Attendee"
                 android:exported="false"/>
         <activity
-                android:name=".view_specific_event"
+                android:name=".ViewSpecificEvent"
                 android:exported="false"/>
         <!--
          Set custom default icon. This is used when no icon is set for incoming notification messages.
@@ -40,10 +40,10 @@
                 android:name=".HomeNav_Admin"
                 android:exported="false"/>
         <activity
-                android:name=".forgetPass"
+                android:name=".ForgetPass"
                 android:exported="false"/>
         <activity
-                android:name=".userRegister"
+                android:name=".UserRegister"
                 android:exported="false"/>
         <activity
                 android:name=".HomePage"
@@ -54,7 +54,7 @@
             android:exported="false"
           />
         <activity
-            android:name=".view_registered_event"
+            android:name=".ViewRegisteredEvent"
             android:exported="false"
             />
 

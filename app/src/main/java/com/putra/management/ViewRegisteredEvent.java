@@ -3,21 +3,16 @@ package com.putra.management;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.ebanx.swipebtn.OnStateChangeListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.ebanx.swipebtn.SwipeButton;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class view_registered_event extends AppCompatActivity {
+public class ViewRegisteredEvent extends AppCompatActivity {
 //    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private String eventDocumentId;
@@ -80,12 +75,12 @@ public class view_registered_event extends AppCompatActivity {
 
                 } else {
                     // Handle the case where the document doesn't exist
-                    Toast.makeText(view_registered_event.this, "Event details not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewRegisteredEvent.this, "Event details not found", Toast.LENGTH_SHORT).show();
                 }
             })
             .addOnFailureListener(e -> {
                 // Handle failures in Firestore query
-                Toast.makeText(view_registered_event.this, "Failed to retrieve event details", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewRegisteredEvent.this, "Failed to retrieve event details", Toast.LENGTH_SHORT).show();
             });
     }
 

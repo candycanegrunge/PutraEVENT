@@ -9,10 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,8 +31,8 @@ import java.util.Objects;
 
 //TODO
 // User Registration - SIGN UP
-public class userRegister extends AppCompatActivity {
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+public class UserRegister extends AppCompatActivity {
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String uid;
 
     private static final String KEY_FIRSTNAME = "firstname";
@@ -96,7 +94,7 @@ public class userRegister extends AppCompatActivity {
         backToSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backToSignIn = new Intent(userRegister.this, MainActivity.class);
+                Intent backToSignIn = new Intent(UserRegister.this, MainActivity.class);
                 startActivity(backToSignIn);
                 finish(); // Optional - finishes the current activity to prevent going back to it on back press
             }
@@ -109,9 +107,9 @@ public class userRegister extends AppCompatActivity {
                 ArrayAdapter<CharSequence> adapter = null;
 
                 if (selectedFaculty.equals(getString(R.string.faculty_fk))) {
-                    adapter = ArrayAdapter.createFromResource(userRegister.this, R.array.FK_options, android.R.layout.simple_spinner_item);
+                    adapter = ArrayAdapter.createFromResource(UserRegister.this, R.array.FK_options, android.R.layout.simple_spinner_item);
                 } else if (selectedFaculty.equals(getString(R.string.faculty_frsb))) {
-                    adapter = ArrayAdapter.createFromResource(userRegister.this, R.array.FRSB_options, android.R.layout.simple_spinner_item);
+                    adapter = ArrayAdapter.createFromResource(UserRegister.this, R.array.FRSB_options, android.R.layout.simple_spinner_item);
                 }
 
                 if (adapter != null) {
@@ -130,7 +128,7 @@ public class userRegister extends AppCompatActivity {
     }
 
     // To check if the user's input is valid
-    public boolean validateInput() {
+    private boolean validateInput() {
         boolean status = false;
         String firstName = editTextFirstName.getText().toString();
         String lastName = editTextLastName.getText().toString();
@@ -148,35 +146,35 @@ public class userRegister extends AppCompatActivity {
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() ||
                 phone.isEmpty() || enterPass.isEmpty() || confirmPass.isEmpty() || yearStudy.isEmpty() ||
                 faculty.isEmpty() || course.isEmpty()) {
-            Toast.makeText(userRegister.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
         }
         // Check if email is valid
         else if (!email.matches("^\\d{6}@student.upm.edu.my$") && !email.matches("^[\\w.-]+@upm.edu.my$")) {
-            Toast.makeText(userRegister.this, "Please insert a valid university mail", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Please insert a valid university mail", Toast.LENGTH_SHORT).show();
         }
         // Check if password is valid
         else if (enterPass.length() < 6) {
-            Toast.makeText(userRegister.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
         }
         // Check if password and confirm password is the same
         else if (!enterPass.equals(confirmPass)) {
-            Toast.makeText(userRegister.this, "Password and confirm password must be the same", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Password and confirm password must be the same", Toast.LENGTH_SHORT).show();
         }
         // TODO: Need to add a hints at the side of the text field to tell the user what is the format of the input for phone
         else if (!phone.matches("^\\d{10,11}$")) {
-            Toast.makeText(userRegister.this, "Phone number must be in the format 01234567890 or 0123456789", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Phone number must be in the format 01234567890 or 0123456789", Toast.LENGTH_SHORT).show();
         }
         // Matric number should be 6 digits
         else if (email.matches("^\\d{6}@student.upm.edu.my$") && matric.length() != 6) {
-            Toast.makeText(userRegister.this, "Matric number must be 6 digits", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Matric number must be 6 digits", Toast.LENGTH_SHORT).show();
         }
         // Check if the user is a staff
         else if (email.matches("^\\d{6}@student.upm.edu.my$") && yearStudy.equals("Staff")) {
-            Toast.makeText(userRegister.this, "Please select your year of study accordingly", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Please select your year of study accordingly", Toast.LENGTH_SHORT).show();
         }
         // Check if the user is a staff
         else if (email.matches("^[\\w.-]+@upm.edu.my$") && yearStudy.equals("Staff")) {
-            Toast.makeText(userRegister.this, "Registered as staff, may ask for admin promotion if needed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserRegister.this, "Registered as staff, may ask for admin promotion if needed", Toast.LENGTH_SHORT).show();
             status = true;
         }
         else
@@ -186,7 +184,7 @@ public class userRegister extends AppCompatActivity {
     }
 
     // Map the user's input to a Map object
-    public Map<String, Object> mapUserDetail() {
+    private Map<String, Object> mapUserDetail() {
         Map<String, Object> userDetail = new HashMap<>();
 
         userDetail.put(KEY_FIRSTNAME, editTextFirstName.getText().toString().toUpperCase());
@@ -209,7 +207,7 @@ public class userRegister extends AppCompatActivity {
     }
 
     // Register user's email and password to Firebase Authentication
-    public void registerNewUser(String email, String password) {
+    private void registerNewUser(String email, String password) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -224,7 +222,7 @@ public class userRegister extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(userRegister.this, "Failed to register user: " + Objects.requireNonNull(task.getException()).getMessage(),
+                            Toast.makeText(UserRegister.this, "Failed to register user: " + Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                             // TODO: Add what to do next
                         }
@@ -241,14 +239,14 @@ public class userRegister extends AppCompatActivity {
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
-                    Toast.makeText(userRegister.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserRegister.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(userRegister.this, "Error saving user detail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserRegister.this, "Error saving user detail", Toast.LENGTH_SHORT).show();
                     Log.d("TAG", e.toString());
                     // TODO: Maybe just prompt check internet connection/try again
                 }
