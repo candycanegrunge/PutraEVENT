@@ -13,20 +13,15 @@ import com.squareup.picasso.Picasso;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewRegisteredEvent extends AppCompatActivity {
-//    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-    private String eventDocumentId;
-    private FirebaseFirestore db;
-//    private String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_specific_registered_event);
 
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
-        eventDocumentId = intent.getStringExtra("eventDocumentId");
+        String eventDocumentId = intent.getStringExtra("eventDocumentId");
 
         // Perform a Firestore query to get detailed event information
         FirebaseFirestore.getInstance().collection("event").document(eventDocumentId)

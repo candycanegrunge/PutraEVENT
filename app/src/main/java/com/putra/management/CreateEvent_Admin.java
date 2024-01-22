@@ -57,7 +57,6 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private static final String KEY_SEAT            = "seat";
     private static final String KEY_USER_REGISTER   = "user_register"; // New field for the array
 
-
     private TextInputEditText titleEnter;
     private TextInputEditText descEnter;
     private TextInputEditText datePickerEditText;
@@ -68,8 +67,6 @@ public class CreateEvent_Admin extends AppCompatActivity {
     private TextInputEditText organiserNameEditText;
     private TextInputEditText totalSeatsEditText;
 
-    private MaterialButton eventSubmit;
-   
     private ImageButton uploadImageButton;
     private ImageView uploadedImageView;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -96,7 +93,7 @@ public class CreateEvent_Admin extends AppCompatActivity {
         organiserNameEditText = findViewById(R.id.organiser);
         totalSeatsEditText = findViewById(R.id.totalSeats);
 
-        eventSubmit = findViewById(R.id.submit_btn_eventCreate);
+        MaterialButton eventSubmit = findViewById(R.id.submit_btn_eventCreate);
 
         uploadImageButton = findViewById(R.id.uploadImageButton);
         uploadedImageView = findViewById(R.id.uploadedImageView);

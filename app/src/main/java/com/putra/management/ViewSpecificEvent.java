@@ -23,11 +23,9 @@ import java.util.Objects;
 
 public class ViewSpecificEvent extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
     private String eventDocumentId;
-    private ImageButton backButton_EventRegis_Home;
     private FirebaseFirestore db;
-    private String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+    private final String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,6 +153,7 @@ public class ViewSpecificEvent extends AppCompatActivity {
             }
         });
     }
+
     private void updateFirestoreArray(DocumentReference docRef, String arrayName, String itemId, String successMessage) {
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {

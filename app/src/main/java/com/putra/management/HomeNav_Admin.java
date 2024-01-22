@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeNav_Admin extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private NavigationView navigationView;
     private DrawerLayout drawer;
 
 
@@ -24,7 +23,7 @@ public class HomeNav_Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_nav_admin);
 
-        navigationView = findViewById(R.id.nav_view_admin);
+        NavigationView navigationView = findViewById(R.id.nav_view_admin);
         drawer = findViewById(R.id.drawer_layout);
 
 
